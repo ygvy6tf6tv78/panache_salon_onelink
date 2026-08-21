@@ -21,7 +21,7 @@ export const shopConfig = {
   snapshotHours: 'Daily 10:00 AM - 8:00 PM',
   url: PUBLIC_SITE_URL,
   cardType: 'B2C' as const,
-  keywordBadges: ['Luxury Boutique Salon', 'Sector 9D • Chandigarh'] as string[],
+  keywordBadges: ['Luxury Boutique Salon'] as string[],
 
   contact: {
     phones: ['6239604348', '9560983067'],

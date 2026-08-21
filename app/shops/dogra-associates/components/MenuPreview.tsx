@@ -45,7 +45,7 @@ export default function MenuPreview() {
       </motion.div>
 
       {/* 4-card square grid — Mango "Our Menu" geometry */}
-      <div className="grid grid-cols-2 gap-2.5 px-2 mb-5">
+      <div className="grid grid-cols-2 gap-3.5 mb-6">
         {servicesPreviewCards.map((card, index) => {
           const Icon = previewIconMap[card.key] ?? Sparkles
           return (
@@ -55,18 +55,18 @@ export default function MenuPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: index * 0.05, duration: 0.35, ease: 'easeOut' }}
-              className="relative aspect-square rounded-[21px] overflow-hidden cursor-pointer group border border-white/16 shadow-[0_12px_25px_rgba(15,15,15,0.28)] transition-all duration-300"
+              className="relative aspect-square rounded-[24px] overflow-hidden cursor-pointer group border border-white/10 shadow-[0_16px_32px_rgba(0,0,0,0.22)] transition-all duration-300"
             >
               <Image
                 src={card.image}
                 alt={card.name}
                 fill
-                className="object-cover scale-[1.02] blur-[1px] group-hover:scale-[1.07] transition-transform duration-500"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 448px) 50vw, 224px"
               />
 
               {/* Inner hairline border – matches Mango */}
-              <div className="absolute inset-[1px] rounded-[20px] border border-white/8 z-[1]" />
+              <div className="absolute inset-[1px] rounded-[23px] border border-white/10 z-[1]" />
 
               {/* Subtle top sheen */}
               <div className="absolute inset-x-5 top-4 h-12 rounded-full bg-white/10 blur-2xl z-[1]" />
@@ -76,7 +76,7 @@ export default function MenuPreview() {
                 className="absolute inset-0 z-[1]"
                 style={{
                   background:
-                    'linear-gradient(to top, rgba(15,13,12,0.98) 0%, rgba(20,17,15,0.88) 38%, rgba(29,25,22,0.52) 68%, rgba(29,25,22,0.12) 100%)',
+                    'linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.82) 28%, rgba(0,0,0,0.54) 55%, rgba(0,0,0,0.18) 82%, rgba(0,0,0,0.04) 100%)',
                 }}
               />
 
@@ -99,19 +99,19 @@ export default function MenuPreview() {
               {/* Title + subtitle + "View Services" pill (Mango layout) */}
               <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-10">
                 <h3
-                  className="text-white font-bold text-base sm:text-lg mb-0.5 leading-tight line-clamp-2"
+                  className="text-white font-bold text-[15px] sm:text-[17px] mb-0.5 leading-tight line-clamp-2"
                   style={{ textShadow: '0 1px 3px rgba(0,0,0,0.85)' }}
                 >
                   {card.name}
                 </h3>
                 <p
-                  className="text-slate-300 text-xs sm:text-sm font-medium leading-snug mb-2.5 line-clamp-2"
+                  className="mb-2.5 overflow-hidden text-ellipsis whitespace-nowrap text-[10px] font-semibold leading-tight text-slate-200 sm:text-[11px]"
                   style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7)' }}
                 >
                   {card.shortDescription}
                 </p>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/35 bg-black/28 px-3 py-1.5 text-xs font-bold text-white shadow-[0_5px_12px_rgba(0,0,0,.18)] backdrop-blur-md transition-colors sm:text-sm">
-                  Explore Service
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/14 px-3 py-1.5 text-xs font-semibold text-slate-100 backdrop-blur-md transition-colors sm:text-sm">
+                  Explore
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </span>
               </div>
