@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -545,7 +546,7 @@ export default function Hero() {
                       })}
                       <button
                         type="button"
-                        onClick={(event) => { event.stopPropagation(); setHoursPopoverOpen((open) => !open) }}
+                        onClick={(event) => { event.stopPropagation(); window.setTimeout(() => setHoursPopoverOpen(true), 0) }}
                         className="inline-flex items-center gap-1.5 rounded-full px-3 py-[6px] text-[11px] font-semibold"
                         style={{ background: '#FFFFFF', color: '#1D1B19', border: '1px solid rgba(138,115,58,.34)', boxShadow: '0 2px 7px rgba(0,0,0,.08)' }}
                         aria-expanded={hoursPopoverOpen}
@@ -554,8 +555,7 @@ export default function Hero() {
                         {openStatus.isOpen ? `Open till ${openStatus.closeTimeLabel}` : `Closed · opens ${openStatus.openTimeLabel}`}
                       </button>
                     </div>
-                    <AnimatePresence>
-                      {hoursPopoverOpen && (
+                      {hoursPopoverOpen && typeof document !== 'undefined' && createPortal(
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[99999] flex items-center justify-center overflow-y-auto bg-[#18120d]/55 p-4 backdrop-blur-md" onClick={(event) => { event.stopPropagation(); setHoursPopoverOpen(false) }}>
                           <motion.div initial={{ y: 80, opacity: 0, scale: .94 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 65, opacity: 0, scale: .96 }} transition={{ type: 'spring', stiffness: 310, damping: 27 }} className="relative w-full max-w-[360px] overflow-hidden rounded-[30px] border border-white/75 bg-white/90 p-5 shadow-[0_30px_80px_rgba(0,0,0,.34)] backdrop-blur-2xl" onClick={(event) => event.stopPropagation()}>
                             <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#ead28f]/25 blur-3xl" />
@@ -564,8 +564,7 @@ export default function Hero() {
                             <div className="relative mt-3 space-y-1.5">{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map((dayName) => { const today = dayName === new Date().toLocaleDateString('en-US',{weekday:'long'}); return <div key={dayName} className="flex items-center justify-between rounded-[14px] border px-3 py-2.5" style={{background:today?'rgba(242,229,197,.88)':'rgba(255,255,255,.55)',borderColor:today?'rgba(154,122,53,.26)':'rgba(222,211,191,.75)'}}><span className="text-[13px] font-bold text-[#30271d]">{dayName}{today&&<span className="ml-2 rounded-full bg-[#80652c] px-2 py-0.5 text-[8px] font-black uppercase tracking-wide text-white">Today</span>}</span><span className="text-[11px] font-bold text-[#6b5b48]">10:00 AM – 8:00 PM</span></div>})}</div>
                           </motion.div>
                         </motion.div>
-                      )}
-                    </AnimatePresence>
+                      , document.body)}
                   </div>
                 )}
               </motion.div>
