@@ -325,17 +325,17 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: shopConfig.contactPersons.indexOf(person) * 0.1 }}
                       onClick={() => handleCall(person)}
-                      className="flex flex-col items-center gap-2 touch-manipulation"
+                      className="flex min-w-[112px] flex-col items-center gap-2 rounded-2xl border border-[#d5bb72] bg-[#fffaf0] px-4 py-3 shadow-[0_8px_18px_rgba(96,75,34,.12)] outline-none touch-manipulation focus-visible:ring-2 focus-visible:ring-[#9a8140]/35"
                       style={{ WebkitTapHighlightColor: 'transparent' }}
                     >
                       <div
                         className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform"
                         style={{
-                          background: '#E5E7EB',
-                          border: '1px solid rgba(148,163,184,0.6)',
+                          background: 'linear-gradient(135deg,#604B22,#9A8140)',
+                          border: '1px solid rgba(216,190,128,.78)',
                         }}
                       >
-                        <Phone className="w-7 h-7" style={{ color: '#7A2148' }} />
+                        <Phone className="w-7 h-7" style={{ color: '#FFFFFF' }} />
                       </div>
                       <span className="text-xs font-semibold text-slate-800 text-center">{person.label}</span>
                     </motion.button>

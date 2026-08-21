@@ -536,7 +536,7 @@ export default function Hero() {
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
                   <div className="flex flex-col gap-2 mb-4 w-full">
                     {/* Business highlights with a dedicated timings control. */}
-                    <div className="flex flex-wrap items-center gap-2 w-full">
+                    <div className="flex flex-nowrap items-center gap-2 w-full overflow-hidden">
                       {shopConfig.keywordBadges.map((badge: string) => {
                         const Icon = getKeywordBadgeIcon(badge)
                         return (
@@ -555,6 +555,8 @@ export default function Hero() {
                           </span>
                         )
                       })}
+                    </div>
+                    <div className="flex items-center">
                       <button
                         type="button"
                         onClick={(event) => { event.stopPropagation(); window.setTimeout(() => setHoursPopoverOpen(true), 0) }}

@@ -34,7 +34,7 @@ export default function PackagesPage() {
       style={{ background: '#F4F1EB' }}
     >
       <div className="mx-auto w-full max-w-md">
-        <div className="sticky top-0 z-30 -mx-3 bg-[#F4F1EB] px-3 pt-2 pb-1">
+        <div className="-mx-3 px-3 pt-2 pb-1">
         <header data-marble-hero className="overflow-hidden rounded-[28px] border border-white/20 p-3.5 text-white shadow-[0_16px_34px_rgba(79,56,18,.24)]" style={{ backgroundImage: "linear-gradient(90deg,rgba(48,34,13,.98) 0%,rgba(103,77,28,.94) 54%,rgba(139,106,42,.68) 100%),url('/femina/panache-hair-editorial.png')", backgroundSize: 'cover', backgroundPosition: 'center right' }}>
           <div className="relative flex items-center justify-between">
             <Link
@@ -50,8 +50,8 @@ export default function PackagesPage() {
             </h1>
             <span className="z-10 rounded-full bg-white/14 px-2.5 py-1 text-[10px] font-black uppercase tracking-[.12em] ring-1 ring-white/20">Prices</span>
           </div>
-          <p className="mt-3 px-1 text-sm font-medium leading-6 text-white/82">
-            Explore currently published Panaché hair, beauty and grooming prices.
+          <p className="mt-2.5 px-1 text-xs font-medium leading-5 text-white/82">
+            Explore current salon prices by category.
           </p>
           <nav className="mt-3 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/55 bg-white/95 p-1.5 shadow-[0_10px_22px_rgba(0,0,0,.15)]"><Link href="/services" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><Scissors className="h-3.5 w-3.5"/>Services</Link><Link data-active="true" href="/packages" className="flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[linear-gradient(135deg,#665020,#9a7a35)] text-[11px] font-black text-white"><IndianRupee className="h-3.5 w-3.5"/>Prices</Link><Link href="/book-consultation" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><CalendarDays className="h-3.5 w-3.5"/>Book</Link></nav>
           <div className="mt-4"><p className="mb-2 text-[10px] font-black uppercase tracking-[.15em] text-white/70">Categories</p><div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">

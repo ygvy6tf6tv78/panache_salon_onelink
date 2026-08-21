@@ -45,7 +45,7 @@ export default function MenuPreview() {
       </motion.div>
 
       {/* 4-card square grid — Mango "Our Menu" geometry */}
-      <div className="grid grid-cols-2 gap-3.5 mb-5">
+      <div className="grid grid-cols-2 gap-2.5 px-2 mb-5">
         {servicesPreviewCards.map((card, index) => {
           const Icon = previewIconMap[card.key] ?? Sparkles
           return (
@@ -55,7 +55,7 @@ export default function MenuPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: index * 0.05, duration: 0.35, ease: 'easeOut' }}
-              className="relative aspect-square rounded-[24px] overflow-hidden cursor-pointer group border border-white/20 shadow-[0_16px_32px_rgba(15,15,15,0.32)] transition-all duration-300"
+              className="relative aspect-square rounded-[21px] overflow-hidden cursor-pointer group border border-white/16 shadow-[0_12px_25px_rgba(15,15,15,0.28)] transition-all duration-300"
             >
               <Image
                 src={card.image}
@@ -66,7 +66,7 @@ export default function MenuPreview() {
               />
 
               {/* Inner hairline border – matches Mango */}
-              <div className="absolute inset-[1px] rounded-[23px] border border-white/10 z-[1]" />
+              <div className="absolute inset-[1px] rounded-[20px] border border-white/8 z-[1]" />
 
               {/* Subtle top sheen */}
               <div className="absolute inset-x-5 top-4 h-12 rounded-full bg-white/10 blur-2xl z-[1]" />

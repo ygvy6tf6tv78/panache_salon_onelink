@@ -39,19 +39,21 @@ export default function Home() {
 
     const section = consumeReturnSection()
     const skipLoad = consumeSkipLoad() || section !== null
+    const hasSeenIntro = window.sessionStorage.getItem('panacheIntroSeen') === 'true'
 
     if (section) setRestoreSection(section)
 
-    if (skipLoad) {
+    if (skipLoad || hasSeenIntro) {
       setShowLoading(false)
       // Section restore is handled in the next effect once <main> exists.
       // Avoid forcing top scroll here; it can feel like the OneLink jumps.
       return
     }
 
-    // Show loading screen briefly to mask paint flash on cold loads.
-    const timer = setTimeout(() => setShowLoading(false), 1600)
-    const fallbackTimer = setTimeout(() => setShowLoading(false), 2500)
+    // Show the branded intro once per tab only; inner-page navigation stays instant.
+    window.sessionStorage.setItem('panacheIntroSeen', 'true')
+    const timer = setTimeout(() => setShowLoading(false), 550)
+    const fallbackTimer = setTimeout(() => setShowLoading(false), 900)
     return () => {
       clearTimeout(timer)
       clearTimeout(fallbackTimer)

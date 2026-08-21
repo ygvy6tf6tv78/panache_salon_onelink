@@ -66,7 +66,7 @@ Please confirm the appointment.`
       }}
     >
       <div className="mx-auto w-full max-w-md pb-6">
-        <div className="sticky top-0 z-30 -mx-3 bg-white px-3 pt-2 pb-1"><motion.header
+        <div className="-mx-3 bg-white px-3 pt-2 pb-1"><motion.header
           data-page-hero
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
