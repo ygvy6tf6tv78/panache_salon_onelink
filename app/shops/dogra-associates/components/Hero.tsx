@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Clock, Store, Hand, Award, Calendar, FileText, ArrowLeft, Instagram, Share2 } from 'lucide-react'
+import { MapPin, Clock, Clock3, ChevronRight, X, Store, Hand, Award, Calendar, FileText, ArrowLeft, Instagram, Share2 } from 'lucide-react'
 import { shopConfig, ContactPerson } from '../config'
 import ActionsRow, { ActionsRowRef } from './ActionsRow'
 import Card3D, { Face } from '../../../components/Card3D'
@@ -30,6 +30,17 @@ export default function Hero() {
   const headerImages = ['/femina/bridal.JPG', '/femina/hair-color.webp', '/femina/makeup.webp']
   const [headerImageIndex, setHeaderImageIndex] = useState(0)
   const [hoursPopoverOpen, setHoursPopoverOpen] = useState(false)
+  const [hoursPortalMounted, setHoursPortalMounted] = useState(false)
+
+  useEffect(() => setHoursPortalMounted(true), [])
+  useEffect(() => {
+    if (!hoursPopoverOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') setHoursPopoverOpen(false) }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', closeOnEscape) }
+  }, [hoursPopoverOpen])
 
   // 180° = 0.65s, 360° = 1.3s, 540° = 2s (same angular speed)
   const DURATION_180_MS = 650
@@ -547,24 +558,28 @@ export default function Hero() {
                       <button
                         type="button"
                         onClick={(event) => { event.stopPropagation(); window.setTimeout(() => setHoursPopoverOpen(true), 0) }}
-                        className="inline-flex items-center gap-1.5 rounded-full px-3 py-[6px] text-[11px] font-semibold"
-                        style={{ background: '#FFFFFF', color: '#1D1B19', border: '1px solid rgba(138,115,58,.34)', boxShadow: '0 2px 7px rgba(0,0,0,.08)' }}
+                        className="group inline-flex h-8 w-fit shrink-0 items-center gap-1.5 rounded-full border px-2.5 text-left transition active:scale-95"
+                        style={{ background: openStatus.isOpen ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.12)', color: openStatus.isOpen ? '#16A34A' : '#E5484D', borderColor: openStatus.isOpen ? 'rgba(34,197,94,.45)' : 'rgba(239,68,68,.40)', boxShadow: openStatus.isOpen ? '0 6px 14px rgba(34,197,94,.16)' : '0 6px 14px rgba(239,68,68,.12)' }}
                         aria-expanded={hoursPopoverOpen}
                       >
-                        <Clock className="h-3.5 w-3.5" style={{ color: openStatus.isOpen ? '#22A447' : '#D13A3A' }} strokeWidth={2.35} />
-                        {openStatus.isOpen ? `Open till ${openStatus.closeTimeLabel}` : `Closed · opens ${openStatus.openTimeLabel}`}
+                        <Clock3 className="h-4 w-4" strokeWidth={2.3} />
+                        <span className="text-[11px] font-black">{openStatus.isOpen ? 'Open now' : 'Closed now'}</span>
+                        <span className="text-[9.5px] font-extrabold opacity-90">{openStatus.isOpen ? `· Closes ${openStatus.closeTimeLabel}` : `· Opens ${openStatus.openTimeLabel}`}</span>
+                        <ChevronRight className="h-3 w-3 opacity-75 transition-transform group-hover:translate-x-0.5" />
                       </button>
                     </div>
-                      {hoursPopoverOpen && typeof document !== 'undefined' && createPortal(
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[99999] flex items-center justify-center overflow-y-auto bg-[#18120d]/55 p-4 backdrop-blur-md" onClick={(event) => { event.stopPropagation(); setHoursPopoverOpen(false) }}>
-                          <motion.div initial={{ y: 80, opacity: 0, scale: .94 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 65, opacity: 0, scale: .96 }} transition={{ type: 'spring', stiffness: 310, damping: 27 }} className="relative w-full max-w-[360px] overflow-hidden rounded-[30px] border border-white/75 bg-white/90 p-5 shadow-[0_30px_80px_rgba(0,0,0,.34)] backdrop-blur-2xl" onClick={(event) => event.stopPropagation()}>
+                    {hoursPortalMounted && createPortal(<AnimatePresence>
+                      {hoursPopoverOpen && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed left-1/2 top-3 z-[99999] flex h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-md -translate-x-1/2 items-start justify-center overflow-y-auto rounded-[26px] border border-[#d8be80]/65 bg-[#18120d]/48 p-4 pt-6 shadow-[0_28px_80px_rgba(0,0,0,.42)] backdrop-blur-md" onClick={() => setHoursPopoverOpen(false)}>
+                          <motion.div initial={{ y: 45, opacity: 0, scale: .96 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 35, opacity: 0, scale: .97 }} transition={{ type: 'spring', stiffness: 310, damping: 27 }} className="relative w-full max-w-[360px] overflow-hidden rounded-[28px] border border-[#e2d2b4] bg-white p-5 shadow-[0_24px_64px_rgba(0,0,0,.32)]" onClick={(event) => event.stopPropagation()}>
                             <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#ead28f]/25 blur-3xl" />
-                            <div className="relative flex items-center justify-between"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#dec88d] bg-white/75 text-[#80652c] shadow-sm"><Clock className="h-5 w-5" /></span><div><p className="text-[10px] font-black uppercase tracking-[.18em] text-[#9B7A32]">Salon hours</p><h3 className="mt-0.5 text-xl font-black text-[#181818]">Plan your visit</h3></div></div><button type="button" onClick={() => setHoursPopoverOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-[#ded3bf] bg-white/70 text-lg font-bold text-[#604B22]" aria-label="Close timings">×</button></div>
+                            <div className="relative flex items-center justify-between"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-2xl border border-white bg-white/75 text-[#80652c] shadow-lg"><Clock3 className="h-5 w-5" /></span><div><p className="text-[10px] font-black uppercase tracking-[.18em] text-[#9B7A32]">Salon hours</p><h3 className="mt-0.5 text-xl font-black text-[#181818]">Plan your visit</h3></div></div><button type="button" onClick={() => setHoursPopoverOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-white bg-white/75 text-[#80652c]" aria-label="Close timings"><X className="h-4 w-4" /></button></div>
                             <div className="relative mt-4 flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/80 px-3 py-2.5"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(34,197,94,.12)]"/><p className="text-xs font-extrabold text-emerald-800">{openStatus.isOpen ? `Open now · closes ${openStatus.closeTimeLabel}` : `Closed now · opens ${openStatus.openTimeLabel}`}</p></div>
                             <div className="relative mt-3 space-y-1.5">{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map((dayName) => { const today = dayName === new Date().toLocaleDateString('en-US',{weekday:'long'}); return <div key={dayName} className="flex items-center justify-between rounded-[14px] border px-3 py-2.5" style={{background:today?'rgba(242,229,197,.88)':'rgba(255,255,255,.55)',borderColor:today?'rgba(154,122,53,.26)':'rgba(222,211,191,.75)'}}><span className="text-[13px] font-bold text-[#30271d]">{dayName}{today&&<span className="ml-2 rounded-full bg-[#80652c] px-2 py-0.5 text-[8px] font-black uppercase tracking-wide text-white">Today</span>}</span><span className="text-[11px] font-bold text-[#6b5b48]">10:00 AM – 8:00 PM</span></div>})}</div>
                           </motion.div>
                         </motion.div>
-                      , document.body)}
+                      )}
+                    </AnimatePresence>, document.body)}
                   </div>
                 )}
               </motion.div>

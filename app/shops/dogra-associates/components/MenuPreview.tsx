@@ -110,7 +110,7 @@ export default function MenuPreview() {
                 >
                   {card.shortDescription}
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-white font-bold text-xs sm:text-sm bg-[linear-gradient(135deg,#765820,#a27d31)] px-3 py-1.5 rounded-full transition-colors border border-[#efd58e]/65 shadow-[0_6px_14px_rgba(0,0,0,.24)]">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/35 bg-black/28 px-3 py-1.5 text-xs font-bold text-white shadow-[0_5px_12px_rgba(0,0,0,.18)] backdrop-blur-md transition-colors sm:text-sm">
                   Explore Service
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </span>

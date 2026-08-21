@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Download, X, Calendar, IndianRupee, Scissors, Instagram, Star } from 'lucide-react'
+import { Phone, Download, X, Calendar, ReceiptText, Scissors, Instagram, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -223,7 +223,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
         {/* Row 3: Price Menu | Payment */}
         <div className="order-3 grid grid-cols-2 gap-2 w-full min-w-0">
           <Link href="/packages" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} title="View signature price menu" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#FFFFFF', backgroundImage: 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.78)),url(/femina/panache-skin-editorial.png)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid rgba(242,228,175,.50)', boxShadow: '0 8px 17px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <IndianRupee className="relative z-10 h-5 w-5 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,.24)]" /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Price Menu</span>
+            <ReceiptText className="relative z-10 h-5 w-5 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,.24)]" /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Price Menu</span>
           </Link>
           <Button onClick={() => { playClickSound(); onOpenPayments?.() }} title="Open payment" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ background: 'linear-gradient(135deg,#604B22,#8A733A)', border: '1px solid rgba(242,228,175,.50)', boxShadow: '0 9px 22px rgba(0,0,0,.3), 0 3px 8px rgba(15,23,42,.1), inset 0 1px 0 rgba(255,255,255,.18)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
             <Image src="/femina/icons8-bhim-48.png" alt="" width={20} height={20} className="relative z-10 h-5 w-5 shrink-0 object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,0.16)]" style={{ filter: 'brightness(0) invert(1)' }} aria-hidden /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Payment</span>
@@ -238,13 +238,13 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
             onClick={handleReview}
             className="relative min-w-0 h-11 overflow-hidden rounded-2xl border border-white/80 transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
             style={{
-              background: 'linear-gradient(112deg,#AECBFA 0%,#C6DAFC 22%,#F6AEA6 43%,#FDE293 68%,#A8DAB5 100%)',
-              boxShadow: '0 8px 18px rgba(66,133,244,.20),0 4px 10px rgba(234,67,53,.14),inset 0 1px 0 rgba(255,255,255,.72)',
+              background: 'linear-gradient(135deg,#FFFFFF 0%,#FFF8E7 52%,#F5E7BC 100%)',
+              boxShadow: '0 8px 18px rgba(96,75,34,.16),0 4px 10px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.92)',
               WebkitTapHighlightColor: 'transparent',
               transform: 'translateY(-1px)',
             }}
           >
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-around px-2 opacity-[.25]" aria-hidden>{[1,2,3,4,5].map((star)=><Star key={star} className="h-6 w-6 fill-[#FBBC05] text-[#F4A900]" strokeWidth={1.5} />)}</span>
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-around px-2 opacity-[.12]" aria-hidden>{[1,2,3,4,5].map((star)=><Star key={star} className="h-6 w-6 fill-[#FBBC05] text-[#F4A900]" strokeWidth={1.5} />)}</span>
             <GoogleGIcon className="relative z-10 h-[18px] w-[18px] shrink-0" />
             <span className="relative z-10 text-sm font-bold text-[#151515]">Reviews</span>
           </Link>

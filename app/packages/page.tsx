@@ -40,10 +40,10 @@ export default function PackagesPage() {
             <Link
               href="/"
               onClick={() => prepareReturnToHeroCard()}
-              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20 transition-transform active:scale-95"
+              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white text-[#181818] ring-1 ring-black/10 shadow-sm transition-transform active:scale-95"
               aria-label="Back"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-5 w-5 text-[#181818]" />
             </Link>
             <h1 className="absolute left-0 right-0 px-11 text-center text-[1.4rem] font-black leading-tight tracking-tight text-white">
               Price Menu

@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'Panaché Salon',
   tagline: 'Luxury Boutique Salon',
   url: PUBLIC_SITE_URL,
-  contact: { phones: ['6239604348', '9560983067'], email: '', address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009', mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh', storeHours: 'Daily 10:00 AM - 8:00 PM', officePhone: '6239604348' },
+  contact: { phones: ['6239604348', '9560983067'], email: '', address: 'SCO 16–17, Madhya Marg, near Thomas Cook, Sector 9D, Chandigarh – 160009, India', mapQuery: 'Panache Salon SCO 16 17 Madhya Marg near Thomas Cook Sector 9D Chandigarh 160009 India', storeHours: 'Daily 10:00 AM - 8:00 PM', officePhone: '6239604348' },
   contactPersons: [
     { label: 'Salon' as const, phoneE164: '916239604348', phoneDisplay: '+91 62396 04348', whatsappE164: '919560983067' },
     { label: 'Booking' as const, phoneE164: '919560983067', phoneDisplay: '+91 95609 83067', whatsappE164: '919560983067' },
@@ -22,7 +22,7 @@ export const siteConfig = {
   social: { facebook: 'https://www.facebook.com/', instagram: 'https://www.instagram.com/panache_chd/', twitter: '', linkedin: '' },
   seo: { title: 'Panaché Salon | Luxury Boutique Salon Chandigarh', description: 'Hair, beauty and makeup at Panaché Salon, Sector 9D, Chandigarh.', keywords: 'Panache Salon Chandigarh, luxury boutique salon, hair beauty makeup' },
   credits: { designer: 'RepixelX Studio', designerUrl: 'https://repixelx.com' },
-  google: { placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || '', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20Sector%209D%20Chandigarh', reviewsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20Sector%209D%20Chandigarh' },
+  google: { placeId: 'ChIJ_1hjT4HtDzkRXCPg34enkkQ', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20SCO%2016%2017%20Madhya%20Marg%20Sector%209D%20Chandigarh', reviewsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJ_1hjT4HtDzkRXCPg34enkkQ' },
 }
 
 export type SiteConfig = typeof siteConfig

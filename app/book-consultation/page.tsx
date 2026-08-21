@@ -81,7 +81,7 @@ Please confirm the appointment.`
               className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-[#604B22] shadow-[0_10px_22px_rgba(0,0,0,0.18)] ring-1 ring-white/40 backdrop-blur-md transition-transform active:scale-95"
               aria-label="Back to card"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-5 w-5 text-[#181818]" />
             </Link>
             <h1 className="absolute left-0 right-0 px-12 text-center text-[1.24rem] font-black leading-tight tracking-tight text-white">
               Book Now

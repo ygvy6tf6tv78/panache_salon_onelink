@@ -16,7 +16,7 @@ export const shopConfig = {
   tagline: 'Luxury Boutique Salon',
   taglineShort: 'Hair • Beauty • Makeup • Chandigarh',
   serviceTagline: 'Hair • Beauty • Makeup',
-  snapshotLocationLine: 'SCO 16–17, Ground Floor, Sector 9D, Chandigarh 160009',
+  snapshotLocationLine: 'SCO 16–17, Madhya Marg, near Thomas Cook, Sector 9D, Chandigarh 160009',
   snapshotServicesLine: 'Hair • Beauty • Makeup',
   snapshotHours: 'Daily 10:00 AM - 8:00 PM',
   url: PUBLIC_SITE_URL,
@@ -26,9 +26,9 @@ export const shopConfig = {
   contact: {
     phones: ['6239604348', '9560983067'],
     email: '',
-    address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009',
-    locationLine: 'SCO 16–17, Ground Floor, Sector 9D, Chandigarh',
-    mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh',
+    address: 'SCO 16–17, Madhya Marg, near Thomas Cook, Sector 9D, Chandigarh – 160009, India',
+    locationLine: 'SCO 16–17, Madhya Marg, near Thomas Cook, Sector 9D, Chandigarh',
+    mapQuery: 'Panache Salon SCO 16 17 Madhya Marg near Thomas Cook Sector 9D Chandigarh 160009 India',
     storeHours: 'Daily 10:00 AM - 8:00 PM',
     storeHoursStatus: 'Open daily',
     officePhone: '6239604348',
@@ -38,7 +38,7 @@ export const shopConfig = {
   },
 
   branches: [
-    { name: 'Panaché Salon', address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009', phone: '+91 62396 04348', mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh' },
+    { name: 'Panaché Salon', address: 'SCO 16–17, Madhya Marg, near Thomas Cook, Sector 9D, Chandigarh – 160009, India', phone: '+91 62396 04348', mapQuery: 'Panache Salon SCO 16 17 Madhya Marg near Thomas Cook Sector 9D Chandigarh 160009 India' },
   ],
 
   contactPersons: [
@@ -84,10 +84,9 @@ export const shopConfig = {
   },
 
   google: {
-    // Temporary shared listing while Panaché's verified Google Place ID is pending.
-    placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || 'ChIJq9jGBgGDHjkRqcEyeHk2xtA',
+    placeId: 'ChIJ_1hjT4HtDzkRXCPg34enkkQ',
     mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20SCO%2016%2017%20Sector%209D%20Madhya%20Marg%20Chandigarh',
-    reviewsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJq9jGBgGDHjkRqcEyeHk2xtA',
+    reviewsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJ_1hjT4HtDzkRXCPg34enkkQ',
   },
 
   seo: {
