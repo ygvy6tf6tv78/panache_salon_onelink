@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Clock, Store, Hand, Award, Calendar, FileText, ArrowLeft } from 'lucide-react'
+import { MapPin, Clock, Store, Hand, Award, Calendar, FileText, ArrowLeft, Instagram, Share2 } from 'lucide-react'
 import { shopConfig, ContactPerson } from '../config'
 import ActionsRow, { ActionsRowRef } from './ActionsRow'
 import Card3D, { Face } from '../../../components/Card3D'
@@ -28,6 +28,7 @@ export default function Hero() {
 
   const headerImages = ['/femina/bridal.JPG', '/femina/hair-color.webp', '/femina/makeup.webp']
   const [headerImageIndex, setHeaderImageIndex] = useState(0)
+  const [hoursPopoverOpen, setHoursPopoverOpen] = useState(false)
 
   // 180° = 0.65s, 360° = 1.3s, 540° = 2s (same angular speed)
   const DURATION_180_MS = 650
@@ -390,6 +391,8 @@ export default function Hero() {
                 e.preventDefault()
               }}
             >
+              <motion.button whileTap={{ scale: 0.94 }} onClick={(e) => { e.stopPropagation(); e.preventDefault(); playClickSound(); window.open(shopConfig.social.instagram, '_blank', 'noopener,noreferrer') }} className="grid h-11 w-11 place-items-center rounded-full border border-[#dfb66d]/50 bg-white text-[#b52a70] shadow-[0_9px_20px_rgba(0,0,0,.16)]" aria-label="Open Instagram"><Instagram className="h-5 w-5" /></motion.button>
+              <motion.button whileTap={{ scale: 0.94 }} onClick={async (e) => { e.stopPropagation(); e.preventDefault(); playClickSound(); if (navigator.share) await navigator.share({ title: shopConfig.name, text: shopConfig.tagline, url: window.location.href }); else await navigator.clipboard?.writeText(window.location.href) }} className="grid h-11 w-11 place-items-center rounded-full border border-[#dfb66d]/50 bg-white text-[#604B22] shadow-[0_9px_20px_rgba(0,0,0,.16)]" aria-label="Share Panaché"><Share2 className="h-5 w-5" /></motion.button>
               {/* LinkedIn */}
               {shopConfig.social?.linkedin && (
                 <motion.button
@@ -482,7 +485,7 @@ export default function Hero() {
                 }}
               >
                 <div
-                  className="w-32 h-32 rounded-full flex items-center justify-center overflow-hidden bg-white p-1.5"
+                  className="w-28 h-28 rounded-full flex items-center justify-center overflow-hidden bg-white p-1.5"
                   style={{
                     border: '2px solid rgba(184, 135, 44, 0.48)',
                     boxShadow:
@@ -491,11 +494,11 @@ export default function Hero() {
                 >
                   <Image
                     src={shopConfig.assets.logo}
-                    alt="Luméra Salon & Spa logo"
+                    alt="Panaché Salon logo"
                     width={128}
                     height={128}
                     className="w-full h-full object-contain"
-                    style={{ transform: 'scale(1.25)' }}
+                    style={{ transform: 'scale(1.45)' }}
                   />
                 </div>
               </motion.div>
@@ -520,7 +523,7 @@ export default function Hero() {
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
                   <div className="flex flex-col gap-2 mb-4 w-full">
-                    {/* Row 1: exactly 2 keyword badges side-by-side */}
+                    {/* Business highlights with a dedicated timings control. */}
                     <div className="flex flex-wrap items-center gap-2 w-full">
                       {shopConfig.keywordBadges.map((badge: string) => {
                         const Icon = getKeywordBadgeIcon(badge)
@@ -529,19 +532,40 @@ export default function Hero() {
                             key={badge}
                             className="inline-flex max-w-full items-center gap-1.5 px-3 py-[6px] rounded-full text-[11px] font-semibold"
                             style={{
-                              background:
-                                'linear-gradient(135deg, rgba(236, 253, 245, 0.98) 0%, rgba(240, 253, 250, 0.98) 100%)',
-                              color: '#137B70',
-                              border: '1px solid rgba(19, 123, 112, 0.28)',
-                              boxShadow: '0 2px 6px rgba(15, 118, 110, 0.08)',
+                              background: 'linear-gradient(135deg,#FCF7ED 0%,#EEE1C7 100%)',
+                              color: '#604B22',
+                              border: '1px solid rgba(138,115,58,.34)',
+                              boxShadow: '0 2px 7px rgba(96,75,34,.10)',
                             }}
                           >
-                            <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#137B70' }} strokeWidth={2.2} />
+                            <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#8A733A' }} strokeWidth={2.2} />
                             <span className="leading-none break-words">{badge}</span>
                           </span>
                         )
                       })}
+                      <button
+                        type="button"
+                        onClick={(event) => { event.stopPropagation(); setHoursPopoverOpen((open) => !open) }}
+                        className="inline-flex items-center gap-1.5 rounded-full px-3 py-[6px] text-[11px] font-semibold"
+                        style={{ background: '#FFFFFF', color: '#1D1B19', border: '1px solid rgba(138,115,58,.34)', boxShadow: '0 2px 7px rgba(0,0,0,.08)' }}
+                        aria-expanded={hoursPopoverOpen}
+                      >
+                        <Clock className="h-3.5 w-3.5" style={{ color: openStatus.isOpen ? '#22A447' : '#D13A3A' }} strokeWidth={2.35} />
+                        {openStatus.isOpen ? `Open till ${openStatus.closeTimeLabel}` : `Closed · opens ${openStatus.openTimeLabel}`}
+                      </button>
                     </div>
+                    <AnimatePresence>
+                      {hoursPopoverOpen && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[99999] flex items-center justify-center overflow-y-auto bg-[#18120d]/55 p-4 backdrop-blur-md" onClick={(event) => { event.stopPropagation(); setHoursPopoverOpen(false) }}>
+                          <motion.div initial={{ y: 80, opacity: 0, scale: .94 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 65, opacity: 0, scale: .96 }} transition={{ type: 'spring', stiffness: 310, damping: 27 }} className="relative w-full max-w-[360px] overflow-hidden rounded-[30px] border border-white/75 bg-white/90 p-5 shadow-[0_30px_80px_rgba(0,0,0,.34)] backdrop-blur-2xl" onClick={(event) => event.stopPropagation()}>
+                            <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#ead28f]/25 blur-3xl" />
+                            <div className="relative flex items-center justify-between"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#dec88d] bg-white/75 text-[#80652c] shadow-sm"><Clock className="h-5 w-5" /></span><div><p className="text-[10px] font-black uppercase tracking-[.18em] text-[#9B7A32]">Salon hours</p><h3 className="mt-0.5 text-xl font-black text-[#181818]">Plan your visit</h3></div></div><button type="button" onClick={() => setHoursPopoverOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-[#ded3bf] bg-white/70 text-lg font-bold text-[#604B22]" aria-label="Close timings">×</button></div>
+                            <div className="relative mt-4 flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/80 px-3 py-2.5"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(34,197,94,.12)]"/><p className="text-xs font-extrabold text-emerald-800">{openStatus.isOpen ? `Open now · closes ${openStatus.closeTimeLabel}` : `Closed now · opens ${openStatus.openTimeLabel}`}</p></div>
+                            <div className="relative mt-3 space-y-1.5">{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map((dayName) => { const today = dayName === new Date().toLocaleDateString('en-US',{weekday:'long'}); return <div key={dayName} className="flex items-center justify-between rounded-[14px] border px-3 py-2.5" style={{background:today?'rgba(242,229,197,.88)':'rgba(255,255,255,.55)',borderColor:today?'rgba(154,122,53,.26)':'rgba(222,211,191,.75)'}}><span className="text-[13px] font-bold text-[#30271d]">{dayName}{today&&<span className="ml-2 rounded-full bg-[#80652c] px-2 py-0.5 text-[8px] font-black uppercase tracking-wide text-white">Today</span>}</span><span className="text-[11px] font-bold text-[#6b5b48]">10:00 AM – 8:00 PM</span></div>})}</div>
+                          </motion.div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 )}
               </motion.div>
@@ -573,9 +597,9 @@ export default function Hero() {
             style={{
               minHeight: 'min(580px, 85dvh)',
               boxSizing: 'border-box',
-              background: 'linear-gradient(135deg, #6E2445 0%, #B32A64 100%)',
-              borderColor: 'rgba(10, 102, 178, 0.5)',
-              boxShadow: '0 18px 40px rgba(15,42,68,0.25), 0 0 0 1px rgba(10,102,178,0.15)',
+              background: 'linear-gradient(145deg,#0e0c0a 0%,#211a11 48%,#4a3820 100%)',
+              borderColor: 'rgba(229,214,155,.42)',
+              boxShadow: '0 18px 40px rgba(0,0,0,.28), 0 0 0 1px rgba(229,214,155,.12)',
             }}
             onClick={(e) => {
               if ((e.target as HTMLElement).closest('button, a, [role="button"]')) return
@@ -634,14 +658,13 @@ export default function Hero() {
                 <div
                   className="flex items-start gap-3 w-full mb-3 rounded-[22px] p-3.5 sm:p-4 border shadow-[0_10px_24px_rgba(0,0,0,0.16)]"
                   style={{
-                    background:
-                      'linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(224,239,255,0.92) 100%)',
-                    borderColor: 'rgba(10, 102, 178, 0.4)',
+                    background: 'linear-gradient(135deg,rgba(255,253,247,.97),rgba(235,220,184,.94))',
+                    borderColor: 'rgba(216,197,141,.62)',
                   }}
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_8px_18px_rgba(30,64,175,0.28)]"
-                    style={{ background: 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)' }}
+                    style={{ background: 'linear-gradient(135deg,#604B22,#9A7A35)' }}
                   >
                     <MapPin className="w-5 h-5" style={{ color: '#DBEAFE' }} />
                   </div>
@@ -657,14 +680,13 @@ export default function Hero() {
                 <div
                   className="flex items-start gap-3 w-full mb-3 rounded-[22px] p-3.5 sm:p-4 border shadow-[0_10px_24px_rgba(0,0,0,0.16)]"
                   style={{
-                    background:
-                      'linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(224,239,255,0.92) 100%)',
-                    borderColor: 'rgba(10, 102, 178, 0.4)',
+                    background: 'linear-gradient(135deg,rgba(255,253,247,.97),rgba(235,220,184,.94))',
+                    borderColor: 'rgba(216,197,141,.62)',
                   }}
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_8px_18px_rgba(30,64,175,0.28)]"
-                    style={{ background: 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)' }}
+                    style={{ background: 'linear-gradient(135deg,#604B22,#9A7A35)' }}
                   >
                     <Store className="w-5 h-5" style={{ color: '#DBEAFE' }} />
                   </div>
@@ -680,14 +702,13 @@ export default function Hero() {
                 <div
                   className="flex items-start gap-3 w-full mb-3 rounded-[22px] p-3.5 sm:p-4 border shadow-[0_10px_24px_rgba(0,0,0,0.16)]"
                   style={{
-                    background:
-                      'linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(224,239,255,0.92) 100%)',
-                    borderColor: 'rgba(10, 102, 178, 0.4)',
+                    background: 'linear-gradient(135deg,rgba(255,253,247,.97),rgba(235,220,184,.94))',
+                    borderColor: 'rgba(216,197,141,.62)',
                   }}
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_8px_18px_rgba(30,64,175,0.28)]"
-                    style={{ background: 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)' }}
+                    style={{ background: 'linear-gradient(135deg,#604B22,#9A7A35)' }}
                   >
                     <Clock className="w-5 h-5" style={{ color: '#DBEAFE' }} />
                   </div>
@@ -774,7 +795,7 @@ export default function Hero() {
             <div className="relative h-[220px] shrink-0 overflow-hidden rounded-t-[24px]">
               <Image
                 src="/femina/beauty.jpg"
-                    alt="Luméra Salon & Spa"
+                    alt="Panaché Salon"
                 fill
                 sizes="(max-width: 480px) 100vw, 420px"
                 className="object-cover"
@@ -813,7 +834,7 @@ export default function Hero() {
                     Salon Profile
                   </p>
                   <h2 className="text-[1.6rem] font-black leading-tight tracking-tight text-slate-900">
-                    Luméra Salon & Spa
+                    Panaché Salon
                   </h2>
                   <p className="mt-0.5 text-[13px] font-bold leading-snug text-slate-500">
                     Luxury Hair, Beauty & Makeup Salon
@@ -854,11 +875,11 @@ export default function Hero() {
                 <div className="shrink-0 grid grid-cols-2 gap-2">
                   <div className="rounded-[16px] border border-slate-100 bg-white px-2 py-2.5 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-center flex flex-col justify-center">
                     <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#137B70]">Owner</p>
-                    <p className="mt-1 text-[11px] font-bold leading-snug text-slate-800">Luméra Salon &amp; Spa</p>
+                    <p className="mt-1 text-[11px] font-bold leading-snug text-slate-800">Panaché Salon</p>
                   </div>
                   <div className="rounded-[16px] border border-slate-100 bg-white px-2 py-2.5 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-center flex flex-col justify-center">
                     <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#137B70]">Former HOD</p>
-                    <p className="mt-1 text-[11px] font-bold leading-snug text-slate-800">Sector 17, Chandigarh</p>
+                    <p className="mt-1 text-[11px] font-bold leading-snug text-slate-800">Sector 9D, Chandigarh</p>
                   </div>
                 </div>
               </div>

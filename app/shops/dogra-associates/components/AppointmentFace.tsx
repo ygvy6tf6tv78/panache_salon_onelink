@@ -20,14 +20,16 @@ const REASON_OPTIONS = [
 ]
 
 const TIME_SLOTS = [
-  '7:30 AM',
-  '8:00 AM',
-  '8:30 AM',
-  '9:00 AM',
+  '10:00 AM',
+  '11:00 AM',
+  '12:00 PM',
+  '1:00 PM',
+  '2:00 PM',
+  '3:00 PM',
+  '4:00 PM',
   '5:00 PM',
   '6:00 PM',
   '7:00 PM',
-  '8:00 PM',
 ]
 
 
@@ -100,7 +102,7 @@ export default function AppointmentFace({ onBack }: AppointmentFaceProps) {
     const serviceBlock = hasServiceList
       ? `Appointment regarding:\n${selectedServicesFromPage.map((s, i) => `${i + 1}. ${s}`).join('\n')}`
       : `Service: ${reason}`
-    return `Hi Femina Plus Luxe,
+    return `Hi Panaché,
 
 I would like to book an appointment.
 
@@ -151,7 +153,7 @@ Please confirm the appointment.`
           Book Appointment
         </h2>
         <p className="text-base font-medium mb-5 leading-snug" style={{ color: '#334155' }}>
-          at FP Luxe — Sector 9C
+          at Panaché — Sector 9D
         </p>
 
         {selectedServicesFromPage.length > 0 && (

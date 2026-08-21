@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Calendar, CheckCircle2, ChevronDown, Clock, Phone, Scissors, User } from 'lucide-react'
+import { ArrowLeft, Calendar, CalendarDays, CheckCircle2, ChevronDown, Clock, IndianRupee, Phone, Scissors, User } from 'lucide-react'
 import { shopConfig } from '../shops/dogra-associates/config'
 import { serviceCategories } from '../shops/dogra-associates/services'
 import { getWhatsAppLink } from '../lib/phone'
@@ -46,9 +46,9 @@ export default function BookConsultationPage() {
   const canSubmit = name.trim().length > 1 && service.trim().length > 0 && date && time
   const whatsappPhone = shopConfig.contactPersons[0]?.whatsappE164 || '919149837277'
 
-  const message = `Hi Luméra Salon & Spa,
+  const message = `Hi Panaché,
 
-I would like to book an appointment at Luméra Salon & Spa.
+I would like to book an appointment.
 
 Name: ${name.trim()}
 Phone: ${phone.trim()}
@@ -60,46 +60,48 @@ Please confirm the appointment.`
 
   return (
     <main
-      className="min-h-screen px-3 pt-[max(0.75rem,env(safe-area-inset-top))]"
+      className="panache-page min-h-screen px-3 pt-[max(0.75rem,env(safe-area-inset-top))]"
       style={{
-        background: 'linear-gradient(180deg, #eef7ff 0%, #ffffff 42%, #f8fbff 100%)',
+        background: '#FFFFFF',
       }}
     >
       <div className="mx-auto w-full max-w-md pb-6">
-        <motion.header
+        <div className="sticky top-0 z-30 -mx-3 bg-white px-3 pt-2 pb-1"><motion.header
+          data-page-hero
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="mb-4 overflow-hidden rounded-[28px] border border-white/25 p-3.5 shadow-[0_24px_54px_rgba(7,59,115,0.22),0_8px_18px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.25)]"
-          style={{ background: 'linear-gradient(135deg, #5A1636 0%, #B32A64 72%, #E18AAE 100%)' }}
+          className="mb-3 overflow-hidden rounded-[28px] border border-white/25 p-3.5 shadow-[0_18px_42px_rgba(96,75,34,.22),inset_0_1px_0_rgba(255,255,255,.22)]"
+          style={{ backgroundImage: "linear-gradient(90deg,rgba(48,34,13,.98),rgba(103,77,28,.91),rgba(139,106,42,.62)),url('/femina/panache-beauty-editorial.png')", backgroundSize: 'cover', backgroundPosition: 'center right' }}
         >
           <div className="relative flex items-center justify-between">
             <Link
               href="/"
               onClick={() => prepareReturnToHeroCard()}
-              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-[#7A2148] shadow-[0_10px_22px_rgba(0,0,0,0.18)] ring-1 ring-white/40 backdrop-blur-md transition-transform active:scale-95"
+              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-[#604B22] shadow-[0_10px_22px_rgba(0,0,0,0.18)] ring-1 ring-white/40 backdrop-blur-md transition-transform active:scale-95"
               aria-label="Back to card"
             >
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <h1 className="absolute left-0 right-0 px-12 text-center text-[1.24rem] font-black leading-tight tracking-tight text-white">
-              Book Appointment
+              Book Now
             </h1>
             <span className="z-10 h-10 w-10" aria-hidden />
           </div>
-        </motion.header>
+          <nav className="mt-3 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/55 bg-white/95 p-1.5 shadow-[0_10px_22px_rgba(0,0,0,.15)]"><Link href="/services" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><Scissors className="h-3.5 w-3.5"/>Services</Link><Link href="/packages" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><IndianRupee className="h-3.5 w-3.5"/>Prices</Link><Link data-active="true" href="/book-consultation" className="flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[linear-gradient(135deg,#665020,#9a7a35)] text-[11px] font-black text-white"><CalendarDays className="h-3.5 w-3.5"/>Book</Link></nav>
+        </motion.header></div>
 
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, duration: 0.35 }}
-          className="rounded-[30px] border border-[#B32A64]/15 bg-white p-4 shadow-[0_22px_52px_rgba(7,59,115,0.12),0_8px_18px_rgba(10,102,178,0.05),inset_0_1px_0_rgba(255,255,255,0.98)]"
-          style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5FAFF 100%)' }}
+          className="rounded-[30px] border border-[#C9B779]/45 bg-white p-4 shadow-[0_18px_44px_rgba(96,75,34,.12),inset_0_1px_0_rgba(255,255,255,.98)]"
+          style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F7F1E5 100%)' }}
         >
           <div className="space-y-3">
             <label className="block">
               <span className="mb-1.5 flex items-center gap-2 text-sm font-bold text-[#0F2A44]">
-                <User className="h-4 w-4 text-[#B32A64]" />
+                <User className="h-4 w-4 text-[#806A32]" />
                 Name
               </span>
               <input
@@ -112,11 +114,11 @@ Please confirm the appointment.`
 
             <label className="block">
               <span className="mb-1.5 flex items-center gap-2 text-sm font-bold text-[#0F2A44]">
-                <Phone className="h-4 w-4 text-[#B32A64]" />
-                Phone
+                <Phone className="h-4 w-4 text-[#806A32]" />
+                Mobile Number
               </span>
               <div className="relative flex items-center">
-                <div className="absolute left-0 top-0 bottom-0 z-10 flex w-20 items-center justify-center rounded-l-2xl border-r border-[#F3C7D8] bg-[#FFF1F6] text-[14px] font-black text-[#7A2148]">
+                <div className="absolute left-0 top-0 bottom-0 z-10 flex w-20 items-center justify-center rounded-l-2xl border-r border-[#DED9D2] bg-[#F4F1EB] text-[14px] font-black text-[#604B22]">
                   🇮🇳 +91
                 </div>
                 <input
@@ -134,7 +136,7 @@ Please confirm the appointment.`
 
             <label className="block">
               <span className="mb-1.5 flex items-center gap-2 text-sm font-bold text-[#0F2A44]">
-                <Scissors className="h-4 w-4 text-[#B32A64]" />
+                <Scissors className="h-4 w-4 text-[#806A32]" />
                 Choose Service
               </span>
               <div className="relative">
@@ -151,14 +153,14 @@ Please confirm the appointment.`
                   ))}
                   <option value="Other / Consultation">Other / Consultation</option>
                 </select>
-                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#B32A64]" />
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#806A32]" />
               </div>
             </label>
 
             <div className="grid grid-cols-2 gap-3 w-full">
               <label className="block w-full">
                 <span className="mb-1.5 flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.08em] text-[#0F2A44]">
-                  <Calendar className="h-4 w-4 text-[#B32A64]" />
+                  <Calendar className="h-4 w-4 text-[#806A32]" />
                   Date
                 </span>
                 <div className="relative w-full">
@@ -187,12 +189,12 @@ Please confirm the appointment.`
                   <span className="pointer-events-none absolute left-3 right-8 top-1/2 -translate-y-1/2 truncate text-[16px] font-semibold leading-none text-slate-950">
                     {formatDateForDisplay(date)}
                   </span>
-                  <Calendar className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#B32A64]" />
+                  <Calendar className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#806A32]" />
                 </div>
               </label>
               <label className="block w-full">
                 <span className="mb-1.5 flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.08em] text-[#0F2A44]">
-                  <Clock className="h-4 w-4 text-[#B32A64]" />
+                  <Clock className="h-4 w-4 text-[#806A32]" />
                   Time
                 </span>
                 <div className="relative w-full">
@@ -208,7 +210,7 @@ Please confirm the appointment.`
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#B32A64]" />
+                  <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#806A32]" />
                 </div>
               </label>
             </div>
@@ -223,20 +225,20 @@ Please confirm the appointment.`
             className="mt-5 flex h-12 items-center justify-center gap-2 rounded-2xl text-sm font-black text-white shadow-[0_14px_30px_rgba(10,102,178,0.28)]"
             style={{
               background: canSubmit
-                ? 'linear-gradient(135deg, #B32A64 0%, #137B70 100%)'
+                ? 'linear-gradient(135deg, #604B22 0%, #9A8140 100%)'
                 : 'linear-gradient(135deg, #94A3B8 0%, #CBD5E1 100%)',
               pointerEvents: canSubmit ? 'auto' : 'none',
             }}
           >
             <Calendar className="h-4 w-4" />
-            Book Appointment
+            Request Appointment
           </a>
         </motion.section>
 
         <div className="mt-4 rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm">
-          {['FP Luxe — Sector 9C is preselected', 'Salon confirms final availability on WhatsApp', 'Open daily from 10:00 AM to 9:00 PM'].map((item) => (
+          {['Panaché Salon — Sector 9D, Chandigarh', 'Salon confirms final availability on WhatsApp', 'Open daily from 10:00 AM to 8:00 PM'].map((item) => (
             <div key={item} className="flex items-center gap-2 py-1.5 text-sm font-semibold text-slate-700">
-              <CheckCircle2 className="h-4 w-4 text-[#137B70]" />
+              <CheckCircle2 className="h-4 w-4 text-[#8A733A]" />
               {item}
             </div>
           ))}

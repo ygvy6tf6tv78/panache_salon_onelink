@@ -8,6 +8,7 @@ import { ArrowLeft, ExternalLink, RefreshCw, Star } from 'lucide-react'
 
 import { prepareReturnToHeroCard } from '../lib/homeNavigation'
 import { shopConfig } from '../shops/dogra-associates/config'
+import GoogleGIcon from '../components/GoogleGIcon'
 
 interface GoogleReview {
   author_name: string
@@ -41,7 +42,7 @@ function Stars({ rating, size = 'h-5 w-5' }: { rating: number; size?: string }) 
           key={star}
           className={`${size} ${
             star <= Math.round(rating)
-              ? 'fill-yellow-400 text-yellow-400'
+              ? 'fill-[#9B8468] text-[#9B8468]'
               : 'text-slate-300'
           }`}
         />
@@ -52,7 +53,7 @@ function Stars({ rating, size = 'h-5 w-5' }: { rating: number; size?: string }) 
 
 function InitialAvatar({ name }: { name: string }) {
   return (
-    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#B8872C] text-lg font-black text-white shadow-[0_8px_18px_rgba(184,135,44,0.18)]">
+    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#9B8468] text-lg font-black text-white">
       {name.trim().charAt(0).toUpperCase() || 'G'}
     </div>
   )
@@ -129,16 +130,15 @@ export default function ReviewsPage() {
 
   return (
     <main
-      className="min-h-screen pb-12"
+      className="panache-page min-h-screen pb-12"
       style={{
-        background:
-          'radial-gradient(circle at 50% -12%, rgba(184,135,44,0.12), transparent 22rem), linear-gradient(180deg, #FFFCF4 0%, #FFFFFF 48%, #FFF9E8 100%)',
+        background: '#F4F1EB',
         paddingTop: 'max(0.4rem, env(safe-area-inset-top))',
       }}
     >
       <div className="mx-auto w-full max-w-md px-4">
-        <header className="sticky top-0 z-20 -mx-4 mb-5 border-b border-slate-200/70 bg-[#FFFCF4]/92 px-4 py-3 backdrop-blur-md">
-          <div className="flex items-center justify-between">
+        <header className="sticky top-0 z-20 -mx-4 mb-5 border-b border-[#e3ddd3] bg-white/95 px-4 py-3 backdrop-blur-xl">
+          <div className="relative flex items-center justify-between">
             <Link
               href="/"
               onClick={() => prepareReturnToHeroCard()}
@@ -147,9 +147,7 @@ export default function ReviewsPage() {
             >
               <ArrowLeft className="h-6 w-6" />
             </Link>
-            <h1 className="text-[1.45rem] font-black tracking-tight text-slate-950">
-              Google Reviews
-            </h1>
+            <div className="pointer-events-none absolute inset-x-14 flex items-center justify-center gap-2"><GoogleGIcon className="h-5 w-5"/><h1 className="truncate text-[19px] font-extrabold tracking-[-.025em] text-slate-950">Google Reviews</h1></div>
             <button
               onClick={load}
               className="flex h-11 w-11 items-center justify-center rounded-full text-[#8B641E] active:scale-95"
@@ -160,20 +158,20 @@ export default function ReviewsPage() {
           </div>
         </header>
 
-        <section className="mb-6 rounded-[24px] border border-[#F2D98B] bg-[#FFF9E8] p-5 text-center shadow-[0_14px_30px_rgba(184,135,44,0.10)]">
+        <section className="mb-6 rounded-[24px] border border-[#e5d4a6] bg-[linear-gradient(145deg,#fffdf7,#f1e4c6)] p-5 text-center shadow-[0_14px_30px_rgba(96,75,34,0.12)]">
           <div className="mb-3 flex items-center justify-center gap-3">
-            <Star className="h-7 w-7 fill-[#B8872C] text-[#B8872C]" />
+            <GoogleGIcon className="h-7 w-7" />
             <h2 className="text-xl font-black text-slate-950">Review Us on Google</h2>
-            <Star className="h-7 w-7 fill-[#B8872C] text-[#B8872C]" />
+            <Star className="h-6 w-6 fill-[#B8872C] text-[#B8872C]" />
           </div>
           <p className="mx-auto max-w-xs text-sm font-medium leading-6 text-slate-600">
-            Share your Luméra Salon & Spa experience and help others discover the salon.
+            Share your Panaché experience and help others discover the salon.
           </p>
           <Link
             href={writeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl bg-[#B8872C] text-lg font-black text-white shadow-[0_14px_28px_rgba(184,135,44,0.28)]"
+            className="mt-4 inline-flex h-12 w-full items-center justify-center gap-3 rounded-2xl bg-[linear-gradient(135deg,#604B22,#9A7A35)] text-sm font-black text-white shadow-[0_10px_22px_rgba(96,75,34,.24)]"
           >
             <Star className="h-6 w-6 fill-white text-white" />
             Write a Review
@@ -242,7 +240,7 @@ export default function ReviewsPage() {
             {hasMore ? (
               <button
                 onClick={() => setDisplayCount((count) => count + 3)}
-                className="mt-6 flex h-14 w-full items-center justify-center rounded-2xl bg-[#137B70] text-base font-black text-white shadow-[0_12px_26px_rgba(19,123,112,0.22)]"
+                className="mt-6 flex h-12 w-full items-center justify-center rounded-2xl border border-[#d8c58d] bg-white text-sm font-black text-[#604B22] shadow-sm"
               >
                 View More ({(data.reviews.length - visibleReviews.length).toLocaleString()} more)
               </button>
@@ -252,7 +250,7 @@ export default function ReviewsPage() {
               href={googleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#137B70] text-base font-black text-white shadow-[0_12px_26px_rgba(19,123,112,0.22)]"
+              className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#604B22,#9A7A35)] text-sm font-black text-white shadow-[0_12px_26px_rgba(96,75,34,0.24)]"
             >
               View All Reviews on Google
               <ExternalLink className="h-5 w-5" />

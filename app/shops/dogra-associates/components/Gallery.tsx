@@ -2,21 +2,22 @@
 
 import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import Image from 'next/image'
+import NextLink from 'next/link'
+import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
-import { ArrowRight } from 'lucide-react'
 import { setReturnSection } from '../../../lib/homeNavigation'
 
 // Gallery images from public/gallery folder
 const galleryImages = [
-  '/femina/bridal.JPG',
-  '/femina/hair-color.webp',
-  '/femina/makeup.webp',
-  '/femina/nails.jpeg',
+  '/femina/panache-salon-interior.png',
+  '/femina/panache-hair-editorial.png',
+  '/femina/panache-skin-editorial.png',
+  '/femina/panache-beauty-editorial.png',
 ]
 
 const visibleImages = galleryImages.slice(0, 4)
+const Image = NextImage as any
+const Link = NextLink as any
 
 export default function Gallery() {
   const router = useRouter()
@@ -45,11 +46,11 @@ export default function Gallery() {
         className="mb-6"
       >
         <div className="section-title-accent mb-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#181818] text-left">
             Gallery
           </h2>
         </div>
-        <p className="text-sm sm:text-base text-slate-600 font-normal text-left">
+        <p className="text-sm sm:text-base text-[#5F5A54] font-normal text-left">
           Salon Spaces • Beauty Work • Luxe Care
         </p>
       </motion.div>
@@ -94,14 +95,16 @@ export default function Gallery() {
         <Link
           href="/gallery"
           onClick={() => setReturnSection('gallery')}
-          className="block w-full text-white font-bold py-4 px-6 rounded-2xl transition-all flex items-center justify-center gap-2"
+          className="block w-full text-white font-bold py-3.5 px-6 rounded-2xl transition-all flex items-center justify-center gap-2"
           style={{
-            background: 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)',
-            boxShadow: '0 18px 34px rgba(7, 59, 115, 0.34)',
+            background: 'linear-gradient(135deg,#604B22,#9A7A35)',
+            border: '1px solid rgba(229,214,155,.48)',
+            boxShadow: '0 14px 26px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.16)',
           }}
         >
+          <span className="flex -space-x-2" aria-hidden>{visibleImages.slice(0, 2).map((image) => <span key={image} className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-[#242424]"><Image src={image} alt="" fill sizes="28px" className="object-cover" /></span>)}</span>
           View Gallery
-          <ArrowRight className="w-5 h-5" />
+          <span className="text-lg leading-none" aria-hidden>→</span>
         </Link>
       </motion.div>
     </section>

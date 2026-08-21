@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Download, X, Calendar, Star, ClipboardList, Scissors, MapPin, Gift, Instagram, Share2, Sparkles } from 'lucide-react'
+import { Phone, Download, X, Calendar, IndianRupee, Scissors, Instagram, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -25,9 +25,9 @@ export interface ActionsRowRef {
 }
 
 const servicePreviewImages = [
-  '/femina/hair-color.webp',
-  '/femina/makeup.webp',
-  '/femina/nails.jpeg',
+  '/femina/panache-hair-editorial.png',
+  '/femina/panache-skin-editorial.png',
+  '/femina/panache-beauty-editorial.png',
 ] as const
 
 const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments, onOpenAppointment, onOpenDoctorProfile }, ref) => {
@@ -90,7 +90,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
 
   const handleWhatsApp = (person: ContactPerson) => {
     playClickSound()
-    const message = shopConfig.whatsapp?.defaultMessage || 'Hi Femina Plus Luxe, I would like to book an appointment.'
+    const message = shopConfig.whatsapp?.defaultMessage || 'Hi Panaché, I would like to book an appointment.'
     const whatsappLink = getWhatsAppLink(person.whatsappE164, message)
     window.open(whatsappLink, '_blank')
     setWhatsappSelectorOpen(false)
@@ -133,38 +133,43 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
               setCallSelectorOpen(!callSelectorOpen)
               setWhatsappSelectorOpen(false)
             }}
-            className="w-full min-w-0 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group"
+            className="luxury-gold-border w-full min-w-0 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group"
             style={{
-              background: 'linear-gradient(135deg, #5A1636 0%, #B32A64 100%)',
-              boxShadow: '0 8px 20px rgba(7, 59, 115, 0.34), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              backgroundImage: 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.84)),url(/femina/panache-hair-editorial.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              boxShadow: '0 8px 20px rgba(0,0,0,.28), 0 4px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.22)',
               WebkitTapHighlightColor: 'transparent',
               transform: 'translateY(-1px)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 12px 28px rgba(7, 59, 115, 0.44), 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,0,0,.38), 0 6px 12px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.24)'
               e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)'
-              e.currentTarget.style.background = 'linear-gradient(135deg, #932653 0%, #B32A64 100%)'
+              e.currentTarget.style.backgroundImage = 'linear-gradient(105deg,rgba(101,73,24,.94),rgba(178,150,75,.80)),url(/femina/panache-hair-editorial.png)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 8px 20px rgba(7, 59, 115, 0.34), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+              e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,.28), 0 4px 8px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.2)'
               e.currentTarget.style.transform = 'translateY(-1px) scale(1)'
-              e.currentTarget.style.background = 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)'
+              e.currentTarget.style.backgroundImage = 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.84)),url(/femina/panache-hair-editorial.png)'
             }}
           >
             <Phone className="w-4 h-4 relative z-10" style={{ filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))' }} />
             <span className="text-sm font-bold relative z-10 truncate" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)' }}>{t('callNow')}</span>
           </Button>
 
-          <Link
-            href="/book-consultation"
+          <Button
             title="Book appointment"
             onClick={(e) => {
               playClickSound()
+              e.stopPropagation()
               prepareReturnToHeroCard()
+              window.location.href = '/book-consultation'
             }}
             className="w-full min-w-0 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, #5A1636 0%, #B32A64 100%)',
+              backgroundImage: 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.78)),url(/femina/panache-beauty-editorial.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               color: '#FFFFFF',
               border: '1px solid rgba(255, 255, 255, 0.18)',
               boxShadow: '0 8px 20px rgba(10, 102, 178, 0.34), 0 4px 8px rgba(7, 59, 115, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.22)',
@@ -172,19 +177,19 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
               transform: 'translateY(-1px)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 12px 28px rgba(10, 102, 178, 0.44), 0 6px 12px rgba(7, 59, 115, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.28)'
+              e.currentTarget.style.boxShadow = '0 12px 28px rgba(112,71,82,.34), 0 6px 12px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.28)'
               e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)'
-              e.currentTarget.style.background = 'linear-gradient(135deg, #932653 0%, #B32A64 100%)'
+              e.currentTarget.style.backgroundImage = 'linear-gradient(105deg,rgba(96,75,34,.94),rgba(178,144,70,.76)),url(/femina/panache-beauty-editorial.png)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 8px 20px rgba(10, 102, 178, 0.34), 0 4px 8px rgba(7, 59, 115, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.22)'
+              e.currentTarget.style.boxShadow = '0 8px 20px rgba(112,71,82,.26), 0 4px 8px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.22)'
               e.currentTarget.style.transform = 'translateY(-1px) scale(1)'
-              e.currentTarget.style.background = 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)'
+              e.currentTarget.style.backgroundImage = 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.78)),url(/femina/panache-beauty-editorial.png)'
             }}
           >
             <Calendar className="w-4 h-4 relative z-10" style={{ filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18))' }} />
-            <span className="text-sm font-bold relative z-10 truncate" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.12)' }}>Book Appointment</span>
-          </Link>
+            <span className="text-sm font-bold relative z-10 truncate" style={{ fontSize: '14px', textShadow: '0 1px 2px rgba(0, 0, 0, 0.12)' }}>Book Now</span>
+          </Button>
         </div>
 
         {/* Our Services */}
@@ -196,14 +201,14 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
           }}
           title="Explore our services"
           className="order-2 relative flex min-h-[82px] w-full items-center overflow-hidden rounded-[22px] px-3.5 py-2.5 text-white transition-transform active:scale-[0.98]"
-          style={{ background: '#5A1636', boxShadow: '0 12px 24px rgba(90,22,54,.28), inset 0 1px 0 rgba(255,255,255,.24)', border: '1px solid rgba(255,190,215,.48)' }}
+          style={{ background: '#604B22', boxShadow: '0 12px 24px rgba(96,75,34,.25), inset 0 1px 0 rgba(255,255,255,.2)', border: '1px solid rgba(216,197,141,.72)' }}
         >
-          <AnimatePresence initial={false} mode="sync">
-            <motion.img key={servicePreviewImages[servicePreviewIndex]} src={servicePreviewImages[servicePreviewIndex]} alt="" initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 0.68, scale: 1 }} exit={{ opacity: 0.68, scale: 1.02 }} transition={{ duration: 0.8, ease: 'easeInOut' }} className="absolute inset-0 h-full w-full object-cover object-center" />
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(75,16,45,0.94)_0%,rgba(126,28,74,0.78)_46%,rgba(193,61,116,0.24)_100%)]" />
+          <div className="absolute inset-0 overflow-hidden">
+            <AnimatePresence initial={false} mode="sync"><motion.img key={servicePreviewImages[servicePreviewIndex]} src={servicePreviewImages[servicePreviewIndex]} alt="" initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 0.72, scale: 1 }} exit={{ opacity: 0.72, scale: 1.02 }} transition={{ duration: 0.8, ease: 'easeInOut' }} className="h-full w-full object-cover object-center" /></AnimatePresence>
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#3f3016_0%,rgba(96,75,34,.94)_48%,rgba(96,75,34,.48)_100%)]" />
           <div className="relative z-10 flex min-w-0 items-center gap-3">
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/90 bg-white shadow-[0_7px_18px_rgba(0,0,0,0.22)]"><Scissors className="h-5 w-5 text-[#B32A64]" strokeWidth={2.35} /></div>
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/80 bg-white shadow-[0_7px_18px_rgba(0,0,0,0.22)]"><Scissors className="h-5 w-5 text-[#181818]" strokeWidth={2.35} /></div>
             <div className="min-w-0 text-left"><span className="block text-[16px] font-extrabold tracking-[-0.02em]">Our Services</span><span className="mt-0.5 block truncate text-xs font-medium text-white/82">Hair, beauty, makeup, nails and hair systems</span></div>
           </div>
           <div className="relative z-10 ml-2 flex shrink-0 -space-x-2" aria-hidden>
@@ -215,14 +220,14 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
           </div>
         </Link>
 
-        {/* Row 3: Packages | Doctor Profile */}
+        {/* Row 3: Price Menu | Payment */}
         <div className="order-3 grid grid-cols-2 gap-2 w-full min-w-0">
-          <Link href="/packages" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} title="View signature price menu" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#B32A64', background: '#FFF6FA', border: '1px solid rgba(179,42,100,.26)', boxShadow: '0 8px 17px rgba(143,35,85,.13), inset 0 1px 0 rgba(255,255,255,.86)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <ClipboardList className="relative z-10 h-5 w-5 shrink-0 text-[#B32A64]" /><span className="relative z-10 text-sm font-bold truncate" style={{ fontSize: '14px' }}>Price Menu</span>
+          <Link href="/packages" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} title="View signature price menu" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#FFFFFF', backgroundImage: 'linear-gradient(105deg,rgba(82,58,18,.96),rgba(154,129,64,.78)),url(/femina/panache-skin-editorial.png)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid rgba(242,228,175,.50)', boxShadow: '0 8px 17px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+            <IndianRupee className="relative z-10 h-5 w-5 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,.24)]" /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Price Menu</span>
           </Link>
-          <Link href="/doctor-profile" title="View salon profile" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ background: 'linear-gradient(135deg,#5A1636 0%,#B32A64 100%)', border: '1px solid rgba(255,255,255,.22)', boxShadow: '0 8px 18px rgba(143,35,85,.30), inset 0 1px 0 rgba(255,255,255,.24)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <Sparkles className="relative z-10 h-5 w-5 shrink-0 text-white" /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Salon Profile</span>
-          </Link>
+          <Button onClick={() => { playClickSound(); onOpenPayments?.() }} title="Open payment" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ background: 'linear-gradient(135deg,#604B22,#8A733A)', border: '1px solid rgba(242,228,175,.50)', boxShadow: '0 9px 22px rgba(0,0,0,.3), 0 3px 8px rgba(15,23,42,.1), inset 0 1px 0 rgba(255,255,255,.18)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+            <Image src="/femina/icons8-bhim-48.png" alt="" width={20} height={20} className="relative z-10 h-5 w-5 shrink-0 object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,0.16)]" style={{ filter: 'brightness(0) invert(1)' }} aria-hidden /><span className="relative z-10 text-sm font-bold truncate text-white" style={{ fontSize: '14px' }}>Payment</span>
+          </Button>
         </div>
 
         {/* Row 4: Reviews | Location */}
@@ -231,55 +236,56 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
             href="/reviews"
             title="Read and write Google reviews"
             onClick={handleReview}
-            className="relative min-w-0 h-11 overflow-hidden rounded-2xl border border-[#F4D77B]/70 transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation hover:bg-[#FFFDF7]"
+            className="relative min-w-0 h-11 overflow-hidden rounded-2xl border border-white/80 transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
             style={{
-              background: '#FFFFFF',
-              boxShadow: '0 7px 16px rgba(234,179,8,0.12), inset 0 1px 0 rgba(255,255,255,0.96)',
+              background: 'linear-gradient(112deg,#AECBFA 0%,#C6DAFC 22%,#F6AEA6 43%,#FDE293 68%,#A8DAB5 100%)',
+              boxShadow: '0 8px 18px rgba(66,133,244,.20),0 4px 10px rgba(234,67,53,.14),inset 0 1px 0 rgba(255,255,255,.72)',
               WebkitTapHighlightColor: 'transparent',
               transform: 'translateY(-1px)',
             }}
           >
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-around px-2 opacity-[0.15]" aria-hidden>
-              {[1, 2, 3, 4, 5].map((star) => <Star key={star} className="h-5 w-5 shrink-0 fill-[#FBBC05] text-[#F4A900]" strokeWidth={1.5} />)}
-            </span>
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-around px-2 opacity-[.25]" aria-hidden>{[1,2,3,4,5].map((star)=><Star key={star} className="h-6 w-6 fill-[#FBBC05] text-[#F4A900]" strokeWidth={1.5} />)}</span>
             <GoogleGIcon className="relative z-10 h-[18px] w-[18px] shrink-0" />
             <span className="relative z-10 text-sm font-bold text-[#151515]">Reviews</span>
           </Link>
           <Button
             title="Find our office"
             onClick={() => { playClickSound(); window.location.href = '/nearest-branch' }}
-            className="relative h-11 min-w-0 overflow-hidden rounded-2xl border border-[#F7C7C4] transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation hover:bg-[#FFF9F8]"
+            className="relative h-11 min-w-0 overflow-hidden rounded-2xl border border-white/80 transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
             style={{
-              background: 'linear-gradient(135deg,#FFFFFF 0%,#FFF9F8 100%)',
-              boxShadow: '0 7px 16px rgba(234,67,53,0.10), inset 0 1px 0 rgba(255,255,255,0.96)',
+              background: 'linear-gradient(115deg,#CFEBD7 0%,#DFF1E2 48%,#C7E7D2 100%)',
+              boxShadow: '0 8px 18px rgba(52,168,83,.19),0 4px 9px rgba(21,21,21,.07),inset 0 1px 0 rgba(255,255,255,.82)',
               WebkitTapHighlightColor: 'transparent',
               transform: 'translateY(-1px)',
             }}
           >
-            <MapPin className="relative z-10 h-5 w-5 shrink-0 text-[#EA4335]" strokeWidth={2.4} aria-hidden />
+            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[.14]" viewBox="0 0 180 44" preserveAspectRatio="none" aria-hidden><path d="M-8 34C22 12 42 15 66 28s43 10 62-3 36-14 60-7" fill="none" stroke="#34A853" strokeWidth="2.1"/><path d="M-5 11c30 7 53 5 76-5s45-6 63 5 35 11 53 2" fill="none" stroke="#FBBC05" strokeWidth="1.6"/></svg>
+            <span className="relative z-10 grid h-6 w-6 shrink-0 place-items-center" aria-hidden>
+              <svg viewBox="0 0 24 24" className="h-[21px] w-[21px]"><path d="m2.8 6.1 5.1-2.4v15.9L2.8 22V6.1Z" fill="#34A853"/><path d="m7.9 3.7 6 2.1v15.9l-6-2.1V3.7Z" fill="#FBBC05"/><path d="m13.9 5.8 7.3-2.7V19l-7.3 2.7V5.8Z" fill="#4285F4"/><path d="M16.6 2.2a4.3 4.3 0 0 0-4.3 4.3c0 3.2 4.3 7.8 4.3 7.8s4.3-4.6 4.3-7.8a4.3 4.3 0 0 0-4.3-4.3Z" fill="#EA4335"/><circle cx="16.6" cy="6.5" r="1.65" fill="white"/></svg>
+            </span>
             <span className="relative z-10 text-sm font-bold text-[#151515]">{t('officeLocation')}</span>
           </Button>
         </div>
 
         {/* Row 5: Instagram | WhatsApp */}
         <div className="order-4 grid grid-cols-2 gap-2 w-full min-w-0">
-          <a href={shopConfig.social.instagram} target="_blank" rel="noreferrer" title="Follow Luméra Salon & Spa on Instagram" className="h-11 min-w-0 rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#8B641E', background: 'linear-gradient(135deg,#FFFDF8 0%,#F8E7A3 100%)', border: '1px solid rgba(184,135,44,.28)', boxShadow: '0 8px 16px rgba(184,135,44,.14), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <Instagram className="h-5 w-5 shrink-0" /><span className="text-sm font-bold truncate">Instagram</span>
+          <a data-instagram-button href={shopConfig.social.instagram} target="_blank" rel="noreferrer" title="Follow Panaché Salon on Instagram" className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', boxShadow: '0 8px 18px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+            <Instagram className="relative z-10 h-5 w-5 shrink-0 text-[#DD2A7B]" /><span className="relative z-10 bg-[linear-gradient(90deg,#F58529_0%,#DD2A7B_48%,#8134AF_100%)] bg-clip-text text-sm font-extrabold text-transparent">Instagram</span>
           </a>
-          <Button data-whatsapp-button title="Chat with us on WhatsApp" onClick={() => { playClickSound(); setWhatsappSelectorOpen(true); setCallSelectorOpen(false) }} className="h-11 min-w-0 rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#0F172A', background: 'linear-gradient(135deg,#FFFFFF 0%,#F0FFF6 100%)', border: '1px solid rgba(37,211,102,.26)', boxShadow: '0 8px 16px rgba(24,160,84,.12), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+          <Button data-whatsapp-button title="Chat with us on WhatsApp" onClick={() => { playClickSound(); setWhatsappSelectorOpen(true); setCallSelectorOpen(false) }} className="relative h-11 min-w-0 overflow-hidden rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#0F172A', background: 'linear-gradient(115deg,#FFFFFF 0%,#F5FFF8 58%,#DFF7E8 100%)', border: '1px solid rgba(37,211,102,.22)', boxShadow: '0 8px 16px rgba(37,211,102,.13), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="#25D366" aria-hidden><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg><span className="text-sm font-bold truncate" style={{ fontSize: '14px' }}>{t('whatsapp')}</span>
           </Button>
         </div>
 
         {/* Row 6: Gallery | Save Contact */}
         <div className="order-6 grid grid-cols-2 gap-2 w-full min-w-0">
-          <Link href="/gallery" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} title="View gallery" className="order-2 min-w-0 h-11 rounded-2xl transition-all flex items-center justify-center gap-1.5 sm:gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#0F172A', background: 'linear-gradient(135deg,#FFFFFF 0%,#F4FAFF 100%)', border: '1px solid rgba(7,59,115,.18)', boxShadow: '0 8px 16px rgba(7,59,115,.11), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <span className="flex items-center -space-x-1.5" aria-hidden><span className="relative h-7 w-7 overflow-hidden rounded-full bg-white shadow-sm"><img src="/femina/bridal.JPG" alt="" className="h-full w-full object-cover" /></span><span className="relative h-7 w-7 overflow-hidden rounded-full bg-white shadow-sm"><img src="/femina/makeup.webp" alt="" className="h-full w-full object-cover" /></span></span><span className="text-sm font-bold truncate">{t('gallery')}</span>
+          <Link href="/gallery" onClick={() => { playClickSound(); prepareReturnToHeroCard() }} title="View gallery" className="order-2 min-w-0 h-11 rounded-2xl transition-all flex items-center justify-center gap-1.5 sm:gap-2 active:scale-[0.97] touch-manipulation" style={{ color: '#1D1B19', background: '#FCFBF8', border: '1px solid #E4E0D7', boxShadow: '0 8px 16px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+            <span className="flex items-center -space-x-1.5" aria-hidden><span className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-white bg-white shadow-sm"><img src="/femina/panache-hair-editorial.png" alt="" className="h-full w-full object-cover" /></span><span className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-white bg-white shadow-sm"><img src="/femina/panache-beauty-editorial.png" alt="" className="h-full w-full object-cover" /></span></span><span className="text-sm font-bold truncate">{t('gallery')}</span>
           </Link>
-          <Button title="Save contact to your phone" onClick={handleSaveContact} className="order-1 w-full min-w-0 h-11 bg-[#FFF1F6] hover:bg-[#FFE5EF] backdrop-blur-md text-[#7A2148] rounded-2xl border border-[#F3C7D8] relative overflow-hidden transition-all touch-manipulation flex items-center justify-center gap-2" style={{ boxShadow: '0 8px 16px rgba(179,42,100,.12), inset 0 1px 0 rgba(255,255,255,.9)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
-            <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-amber-200/25 to-transparent animate-[shimmer_2.4s_infinite] pointer-events-none" />
-            <Download className="relative z-10 h-4 w-4 text-[#B32A64]" />
-            <span className="relative z-10 text-sm font-bold truncate">{t('saveContact')}</span>
+          <Button title="Save contact to your phone" onClick={handleSaveContact} className="order-1 w-full min-w-0 h-11 bg-[#FCFBF8] backdrop-blur-md text-[#1D1B19] rounded-2xl border border-[#C7B27E] relative overflow-hidden transition-all touch-manipulation flex items-center justify-center gap-2" style={{ boxShadow: '0 8px 18px rgba(117,89,35,.14), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
+            <span className="pointer-events-none absolute -left-1/3 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/90 to-transparent animate-[shine_3s_ease-in-out_infinite]" />
+            <Download className="relative z-10 h-4 w-4 text-[#1D1B19]" />
+            <span className="relative z-10 text-sm font-bold truncate">Save Panaché</span>
           </Button>
         </div>
 

@@ -15,7 +15,7 @@ export default function SocialConnect() {
   const hasWhatsApp = !!whatsappPhone
 
   const emailBody = `Hello,\n\nI would like to inquire about scan services and appointment availability.\n\nPlease reply at your convenience.\n\nThank you.`
-  const emailSubject = 'Enquiry - Luméra Salon & Spa'
+  const emailSubject = 'Enquiry - Panaché Salon'
 
   const handleShare = async () => {
     playClickSound()

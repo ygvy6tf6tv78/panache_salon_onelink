@@ -1,9 +1,8 @@
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Luméra Salon and Spa">
-  <defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8E7A3"/><stop offset="1" stop-color="#B8872C"/></linearGradient></defs>
-  <rect width="512" height="512" rx="112" fill="#241C18"/>
-  <circle cx="256" cy="205" r="126" fill="none" stroke="url(#gold)" stroke-width="12"/>
-  <path d="M186 290c24-54 44-96 70-142 26 46 46 88 70 142" fill="none" stroke="url(#gold)" stroke-width="15" stroke-linecap="round"/>
-  <path d="M212 294c30-17 58-17 88 0" fill="none" stroke="#F8E7A3" stroke-width="9" stroke-linecap="round"/>
-  <text x="256" y="382" text-anchor="middle" fill="#F8E7A3" font-family="Georgia,serif" font-size="40" letter-spacing="5">LUMÉRA</text>
-  <text x="256" y="420" text-anchor="middle" fill="#D8C9A7" font-family="Arial,sans-serif" font-size="16" letter-spacing="4">SALON · SPA</text>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Panaché Salon">
+  <rect width="512" height="512" rx="112" fill="#FCFBF8"/>
+  <circle cx="256" cy="205" r="126" fill="#E9E2D8" stroke="#9B8468" stroke-width="7"/>
+  <path d="M205 284V139h58c48 0 78 26 78 68s-30 68-78 68h-27" fill="none" stroke="#1D1B19" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M215 330h82" stroke="#9B8468" stroke-width="5" stroke-linecap="round"/>
+  <text x="256" y="387" text-anchor="middle" fill="#1D1B19" font-family="Georgia,serif" font-size="38" letter-spacing="4">PANACHÉ</text>
+  <text x="256" y="424" text-anchor="middle" fill="#746F69" font-family="Arial,sans-serif" font-size="15" letter-spacing="5">SALON</text>
 </svg>

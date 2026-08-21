@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, CheckCircle2, Crown, Gem, Heart, Scissors, Sparkles, Star } from 'lucide-react'
+import { ArrowLeft, CalendarDays, IndianRupee, Scissors } from 'lucide-react'
 
 import { getWhatsAppLink } from '../lib/phone'
 import { prepareReturnToHeroCard } from '../lib/homeNavigation'
@@ -11,7 +12,7 @@ import { shopConfig } from '../shops/dogra-associates/config'
 import { pricingPackages } from '../shops/dogra-associates/pricing'
 
 function packageMessage(title: string) {
-  return `Hi Femina Plus Luxe, I would like to enquire about ${title}. Please share appointment availability.`
+  return `Hi Panaché, I would like to enquire about ${title}. Please share appointment availability.`
 }
 
 function WhatsAppMark() {
@@ -23,105 +24,94 @@ function WhatsAppMark() {
 }
 
 export default function PackagesPage() {
-  const packageIcons = [Crown, Sparkles, Gem, Heart, Scissors, Star]
-  const packageBackgrounds = [
-    '/femina/beauty.jpg',
-    '/femina/hair-color.webp',
-    '/femina/bridal.JPG',
-  ]
+  const categories = ['All', ...Array.from(new Set(pricingPackages.map((item) => item.category)))]
+  const [activeCategory, setActiveCategory] = useState('All')
+  const visiblePackages = useMemo(() => activeCategory === 'All' ? pricingPackages : pricingPackages.filter((item) => item.category === activeCategory), [activeCategory])
 
   return (
     <main
-      className="min-h-screen px-3 pb-10 pt-[max(0.75rem,env(safe-area-inset-top))]"
-      style={{ background: 'linear-gradient(180deg, #fff8fb 0%, #ffffff 38%, #fff4f8 100%)' }}
+      className="panache-page min-h-screen px-3 pb-10 pt-[max(0.75rem,env(safe-area-inset-top))]"
+      style={{ background: '#F4F1EB' }}
     >
       <div className="mx-auto w-full max-w-md">
-        <header
-          className="mb-4 overflow-hidden rounded-[26px] border border-[rgba(179,42,100,0.16)] p-4 shadow-[0_22px_46px_rgba(179,42,100,0.1),0_8px_20px_rgba(15,23,42,0.05),inset_0_1px_0_rgba(255,255,255,0.96)]"
-          style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.98) 0%, #ffffff 58%, #fff1f6 100%)' }}
-        >
+        <div className="sticky top-0 z-30 -mx-3 bg-[#F4F1EB] px-3 pt-2 pb-1">
+        <header data-marble-hero className="overflow-hidden rounded-[28px] border border-white/20 p-3.5 text-white shadow-[0_16px_34px_rgba(79,56,18,.24)]" style={{ backgroundImage: "linear-gradient(90deg,rgba(48,34,13,.98) 0%,rgba(103,77,28,.94) 54%,rgba(139,106,42,.68) 100%),url('/femina/panache-hair-editorial.png')", backgroundSize: 'cover', backgroundPosition: 'center right' }}>
           <div className="relative flex items-center justify-between">
             <Link
               href="/"
               onClick={() => prepareReturnToHeroCard()}
-              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-[#7A2148] shadow-[0_10px_22px_rgba(179,42,100,0.13)] ring-1 ring-[#B32A64]/10 backdrop-blur-md transition-transform active:scale-95"
+              className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20 transition-transform active:scale-95"
               aria-label="Back"
             >
               <ArrowLeft className="h-5 w-5" />
             </Link>
-            <h1 className="absolute left-0 right-0 px-11 text-center text-[1.22rem] font-black leading-tight tracking-tight text-slate-900">
-              Signature Price Menu
+            <h1 className="absolute left-0 right-0 px-11 text-center text-[1.4rem] font-black leading-tight tracking-tight text-white">
+              Price Menu
             </h1>
-            <span className="z-10 h-10 w-10" aria-hidden />
+            <span className="z-10 rounded-full bg-white/14 px-2.5 py-1 text-[10px] font-black uppercase tracking-[.12em] ring-1 ring-white/20">Prices</span>
           </div>
-          <p className="mt-3 px-2 text-center text-[12.5px] font-semibold leading-5 text-slate-600">
-            Curated salon packages with published pricing. Open Services for the complete service list.
+          <p className="mt-3 px-1 text-sm font-medium leading-6 text-white/82">
+            Explore currently published Panaché hair, beauty and grooming prices.
           </p>
-        </header>
+          <nav className="mt-3 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/55 bg-white/95 p-1.5 shadow-[0_10px_22px_rgba(0,0,0,.15)]"><Link href="/services" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><Scissors className="h-3.5 w-3.5"/>Services</Link><Link data-active="true" href="/packages" className="flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[linear-gradient(135deg,#665020,#9a7a35)] text-[11px] font-black text-white"><IndianRupee className="h-3.5 w-3.5"/>Prices</Link><Link href="/book-consultation" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><CalendarDays className="h-3.5 w-3.5"/>Book</Link></nav>
+          <div className="mt-4"><p className="mb-2 text-[10px] font-black uppercase tracking-[.15em] text-white/70">Categories</p><div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={`h-10 shrink-0 rounded-full border px-4 text-xs font-extrabold transition ${activeCategory === category ? 'border-[#E9D18A] bg-[#3F2F12] text-white shadow-[0_7px_16px_rgba(30,20,4,.28)]' : 'border-white/30 bg-white/10 text-white'}`}>{category}</button>)}
+          </div></div>
+        </header></div>
 
         <div className="grid gap-3">
-          {pricingPackages.map((pkg, index) => {
-            const Icon = packageIcons[index % packageIcons.length]
+          {visiblePackages.map((pkg, index) => {
             return (
             <motion.article
               key={pkg.id}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.04, duration: 0.28 }}
-              className="relative overflow-hidden rounded-[23px] border border-[rgba(179,42,100,0.12)] bg-white p-3.5 shadow-[0_14px_34px_rgba(15,23,42,0.06),inset_0_1px_0_rgba(255,255,255,0.96)]"
+              className="relative overflow-hidden rounded-[28px] border border-[#E2D2B4] bg-white p-2 shadow-[0_18px_38px_rgba(79,56,18,.13)]"
             >
               <Image
-                src={packageBackgrounds[index % packageBackgrounds.length]}
+                src={pkg.image}
                 alt=""
                 fill
                 sizes="(max-width: 448px) 100vw, 448px"
-                className="object-cover object-center opacity-[0.16]"
+                className="object-cover object-center opacity-0"
                 aria-hidden
               />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,rgba(255,255,255,.97)_0%,rgba(255,255,255,.90)_52%,rgba(237,247,255,.76)_100%)]" aria-hidden />
-              <div className="absolute right-[-2.4rem] top-[-2.4rem] h-28 w-28 rounded-full bg-[#B32A64]/[0.07] blur-2xl pointer-events-none" />
-              <div className="absolute bottom-[-2.8rem] left-[-2.8rem] h-28 w-28 rounded-full bg-[#B32A64]/[0.06] blur-2xl pointer-events-none" />
-              <div className="relative z-10">
+              <div className="relative h-[158px] overflow-hidden rounded-[22px]"><Image src={pkg.image} alt={pkg.title} fill sizes="448px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/5" /><span className="absolute left-3 top-3 rounded-full border border-white/30 bg-black/30 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.12em] text-white backdrop-blur-md">{pkg.category}</span><span className="absolute bottom-3 right-3 rounded-full border border-white/25 bg-[#604B22]/90 px-3 py-1.5 text-sm font-black text-white backdrop-blur-md">{pkg.price}</span></div>
+              <div className="pointer-events-none absolute inset-0" aria-hidden />
+              <div className="absolute right-[-2.4rem] top-[-2.4rem] h-28 w-28 rounded-full bg-[#9B8468]/[0.10] blur-2xl pointer-events-none" />
+              <div className="absolute bottom-[-2.8rem] left-[-2.8rem] h-28 w-28 rounded-full bg-[#1D1B19]/[0.06] blur-2xl pointer-events-none" />
+              <div className="relative z-10 px-2 pb-2 pt-3.5">
                 <div className="mb-3 flex items-start justify-between gap-2.5">
                   <div className="flex min-w-0 items-start gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#B32A64]/10 bg-[#FFF1F6] shadow-[0_8px_18px_rgba(179,42,100,0.1)]">
-                      <Icon className="h-5 w-5 text-[#B32A64]" strokeWidth={2.25} />
-                    </div>
                     <div className="min-w-0">
-                      <span className="mb-1.5 inline-flex rounded-full border border-[#B32A64]/15 bg-[#F3FCF6] px-2 py-0.5 text-[9.5px] font-extrabold uppercase tracking-[0.08em] text-[#B32A64]">
-                        {pkg.category}
-                      </span>
-                      <h2 className="text-[15px] font-extrabold leading-tight text-slate-950">
+                      <h2 className="text-[17px] font-black leading-tight text-slate-950">
                         {pkg.title}
                       </h2>
                     </div>
                   </div>
-                  <span
-                    className="shrink-0 rounded-2xl border px-3 py-1.5 text-[13px] font-extrabold shadow-[0_8px_18px_rgba(179,42,100,0.1)]"
-                    style={{
-                      color: '#7A2148',
-                      borderColor: 'rgba(179,42,100,0.14)',
-                      background: 'linear-gradient(135deg, #fff1f6 0%, #ffe5ef 100%)',
-                    }}
-                  >
-                    {pkg.price}
-                  </span>
                 </div>
-                <p className="flex items-start gap-1.5 rounded-2xl border border-[#B32A64]/[0.08] bg-[#FFF8FB] px-3 py-2 text-[12.5px] font-semibold leading-5 text-slate-700">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#B32A64]" />
+                <p className="mt-3 flex items-start gap-1.5 text-[12.5px] font-semibold leading-5 text-slate-700">
+                    <span className="mt-0.5 inline-grid h-4 w-4 shrink-0 place-items-center rounded-full border border-[#8C735E] text-[10px] font-black leading-none text-[#8C735E]">✓</span>
                     <span>{pkg.timeline}</span>
                 </p>
                 <p className="mt-2.5 text-[13px] font-medium leading-5 text-slate-600">{pkg.description}</p>
-                <div className="mt-3.5 flex items-center justify-end">
+                <div className="mt-3.5 grid grid-cols-2 gap-2.5">
+                  <Link
+                    href={`/book-consultation?service=${encodeURIComponent(pkg.title)}`}
+                    className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[linear-gradient(135deg,#604B22,#9A8140)] px-3 text-[12px] font-extrabold text-white shadow-[0_8px_18px_rgba(96,75,34,.22)] transition-transform active:scale-[0.98]"
+                  >
+                    <CalendarDays className="h-4 w-4" /> Book Now
+                  </Link>
                   <Link
                       href={getWhatsAppLink(shopConfig.contact.clientPhoneE164, packageMessage(pkg.title))}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl border px-4 text-[13px] font-extrabold shadow-[0_8px_18px_rgba(19,123,112,0.11)] transition-transform active:scale-[0.98]"
+                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border px-3 text-[12px] font-extrabold shadow-[0_8px_18px_rgba(19,123,112,0.11)] transition-transform active:scale-[0.98]"
                       style={{
-                        color: '#B32A64',
-                        borderColor: 'rgba(19,123,112,0.16)',
-                        background: 'linear-gradient(135deg, #FFFFFF 0%, #F1FCF7 100%)',
+                        color: '#5D4A3B',
+                        borderColor: 'rgba(93,74,59,0.18)',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,.96) 0%, rgba(233,226,216,.88) 100%)',
                       }}
                       aria-label={`Enquire about ${pkg.title}`}
                     >

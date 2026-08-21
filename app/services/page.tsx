@@ -5,18 +5,22 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { ArrowLeft, Brush, ChevronLeft, ChevronRight, Crown, Scissors, Sparkles, type LucideIcon } from 'lucide-react'
+import { ArrowLeft, CalendarDays, ChevronLeft, ChevronRight, IndianRupee, Scissors } from 'lucide-react'
 import { getWhatsAppLink } from '../lib/phone'
 import { prepareReturnToHeroCard } from '../lib/homeNavigation'
 import { shopConfig } from '../shops/dogra-associates/config'
 import { serviceCategories, type ServiceCategoryKey, type ServiceItem } from '../shops/dogra-associates/services'
 
-const categoryKeys: ServiceCategoryKey[] = ['hairWomen', 'hairMen', 'hairTreatments', 'beauty', 'nails', 'makeup', 'hairSystems']
-const categoryTabLabels: Record<ServiceCategoryKey, string> = { hairWomen: 'Hair Women', hairMen: 'Hair Men', hairTreatments: 'Treatments', beauty: 'Beauty', nails: 'Nails', makeup: 'Makeup', hairSystems: 'Hair Systems' }
-const categoryIconMap: Record<ServiceCategoryKey, LucideIcon> = { hairWomen: Scissors, hairMen: Scissors, hairTreatments: Sparkles, beauty: Sparkles, nails: Brush, makeup: Crown, hairSystems: Sparkles }
+const categoryKeys: ServiceCategoryKey[] = ['hairWomen', 'hairTreatments', 'beauty', 'hairSystems', 'nails', 'makeup', 'hairMen']
+const categoryTabLabels: Record<ServiceCategoryKey, string> = { hairWomen: 'Hair', hairMen: 'Men', hairTreatments: 'Treatments', beauty: 'Beauty', nails: 'Nails', makeup: 'Makeup', hairSystems: 'Skin' }
+const categoryIconMap: Record<ServiceCategoryKey, string> = { hairWomen: '✂', hairMen: '✂', hairTreatments: '✦', beauty: '✦', nails: '◈', makeup: '✧', hairSystems: '✦' }
+
+function CategoryGlyph({ category, className = '' }: { category: ServiceCategoryKey; className?: string }) {
+  return <span aria-hidden className={`select-none font-black leading-none ${className}`}>{categoryIconMap[category]}</span>
+}
 
 function whatsappMessage(service: string) {
-  return `Hi Femina Plus Luxe, I would like to book ${service}. Please share appointment availability.`
+  return `Hi Panaché, I would like to book ${service}. Please share appointment availability.`
 }
 
 function WhatsAppMark() {
@@ -24,16 +28,34 @@ function WhatsAppMark() {
 }
 
 function CategoryPill({ label, category, isActive, onClick }: { label: string; category: ServiceCategoryKey; isActive: boolean; onClick: () => void }) {
-  const Icon = categoryIconMap[category]
-  return <motion.button type="button" data-category={category} onClick={onClick} whileTap={{ scale: 0.97 }} className="flex shrink-0 items-center gap-1.5 rounded-full border py-1 pl-1.5 pr-2.5 text-[13px] font-bold leading-none transition-all" style={{ background: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.14)', color: isActive ? '#8F2355' : '#FFFFFF', borderColor: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.24)', boxShadow: isActive ? '0 8px 18px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.08)' }}><span className="flex h-7 w-7 items-center justify-center rounded-full" style={{ background: isActive ? '#FFF0F6' : 'rgba(255,255,255,0.16)' }}><Icon className="h-3.5 w-3.5" strokeWidth={2.4} /></span>{label}</motion.button>
+  return <motion.button type="button" data-category={category} onClick={onClick} whileTap={{ scale: 0.97 }} className="flex shrink-0 items-center gap-1.5 rounded-full border py-1 pl-1.5 pr-3 text-[13px] font-extrabold leading-none transition-all" style={{ background: isActive ? '#3F2F12' : 'rgba(255,255,255,0.10)', color: '#FFFFFF', borderColor: isActive ? '#E9D18A' : 'rgba(255,255,255,0.28)', boxShadow: isActive ? '0 8px 18px rgba(30,20,4,.28),inset 0 1px 0 rgba(255,255,255,.16)' : 'none' }}><span className="flex h-7 w-7 items-center justify-center rounded-full" style={{ background: isActive ? '#E9D18A' : 'rgba(255,255,255,0.14)', color: isActive ? '#3F2F12' : '#FFFFFF' }}><CategoryGlyph category={category} className="text-[14px]" /></span>{label}</motion.button>
 }
 
 function ServiceCard({ item, category, index }: { item: ServiceItem; category: ServiceCategoryKey; index: number }) {
-  const Icon = categoryIconMap[category]
-  return <motion.article initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(index * 0.03, 0.24), duration: 0.25 }} className="relative overflow-hidden rounded-[20px] border bg-white p-3.5 shadow-[0_8px_20px_rgba(143,35,85,0.07),inset_0_1px_0_rgba(255,255,255,0.95)]" style={{ borderColor: '#F4D3E1' }}>
-    <div className="mb-3 relative h-20 overflow-hidden rounded-2xl border border-[#F6C7DC]"><Image src={serviceCategories[category].image} alt={serviceCategories[category].name} fill className="object-cover" sizes="448px" /><div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" /></div>
-    <div className="flex items-start gap-3"><div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FFF0F6] ring-1 ring-[#F6C7DC]"><Icon className="h-6 w-6 text-[#B32A64]" strokeWidth={2.3} /></div><div className="min-w-0 flex-1 pr-12"><div className="flex items-start justify-between gap-2"><h2 className="text-base font-black leading-tight text-slate-950">{item.name}</h2>{item.price ? <span className="shrink-0 rounded-full bg-[#FFF0F6] px-2 py-1 text-[10px] font-black tracking-[0.01em] text-[#B32A64]">{item.price}</span> : null}</div>{item.description ? <p className="mt-1.5 text-sm leading-6 text-slate-600">{item.description}</p> : null}</div></div>
-    <Link href={getWhatsAppLink(shopConfig.contact.clientPhoneE164, whatsappMessage(item.name))} target="_blank" rel="noopener noreferrer" aria-label={`Book ${item.name} on WhatsApp`} className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-[0_8px_18px_rgba(15,23,42,0.10)] ring-1 ring-[#F6C7DC]"><WhatsAppMark /></Link>
+  const detail = item.description || `${serviceCategories[category].shortDescription} Includes a consultation before your appointment.`
+  return <motion.article initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(index * 0.03, 0.24), duration: 0.25 }} className="overflow-hidden rounded-[28px] border border-[#E2D2B4] bg-white p-2 shadow-[0_18px_38px_rgba(79,56,18,.13)]">
+    <div className="relative h-[148px] overflow-hidden rounded-[22px] bg-[#E9E2D8]">
+      <Image src={serviceCategories[category].image} alt={item.name} fill sizes="448px" className="object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+      <span className="absolute left-3 top-3 rounded-full border border-white/30 bg-black/30 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.12em] text-white backdrop-blur-md">{categoryTabLabels[category]}</span>
+      {item.price && <span className="absolute bottom-3 right-3 rounded-full border border-white/30 bg-[#604B22]/90 px-3 py-1.5 text-xs font-black text-white backdrop-blur-md">{item.price}</span>}
+    </div>
+    <div className="px-2 pb-2 pt-3.5">
+      <div className="min-w-0">
+        <div className="flex items-start justify-between gap-2">
+          <h2 className="text-[17px] font-black leading-tight text-[#1D1B19]">{item.name}</h2>
+        </div>
+        <p className="mt-1.5 text-[13px] leading-5 text-[#746F69]">{detail}</p>
+      </div>
+    <div className="mt-3 grid grid-cols-2 gap-2.5">
+      <Link href={`/book-consultation?service=${encodeURIComponent(item.name)}`} className="inline-flex h-11 items-center justify-center gap-1.5 rounded-2xl bg-[linear-gradient(135deg,#604B22,#9A8140)] text-[12px] font-extrabold text-white shadow-[0_8px_18px_rgba(96,75,34,.25)] transition-transform active:scale-[.98]">
+        <CalendarDays className="h-3.5 w-3.5" /> Book Now
+      </Link>
+      <Link href={getWhatsAppLink(shopConfig.contact.clientPhoneE164, whatsappMessage(item.name))} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center justify-center gap-1.5 rounded-2xl border border-[#DED9D2] bg-white text-[12px] font-extrabold text-[#1D1B19] shadow-[0_8px_16px_rgba(0,0,0,.10)] transition-transform active:scale-[.98]">
+        <WhatsAppMark /> WhatsApp
+      </Link>
+    </div>
+    </div>
   </motion.article>
 }
 
@@ -51,13 +73,14 @@ export default function ServicesPage() {
     if (requested && categoryKeys.includes(requested)) setActiveCategory(requested)
   }, [searchParams])
 
-  return <main className="min-h-screen bg-white px-3 pb-10 pt-[max(0.75rem,env(safe-area-inset-top))]"><div className="mx-auto w-full max-w-md">
-    <header className="mb-4 overflow-hidden rounded-[28px] border border-white/20 p-3.5 text-white shadow-[0_14px_30px_rgba(143,35,85,0.20)]" style={{ background: 'linear-gradient(135deg,#5A1636 0%,#B32A64 58%,#E18AAE 100%)' }}>
-      <div className="relative flex items-center justify-between"><Link href="/" onClick={() => prepareReturnToHeroCard()} className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20" aria-label="Back"><ArrowLeft className="h-5 w-5" /></Link><h1 className="absolute left-0 right-0 px-12 text-center text-[1.65rem] font-black leading-tight tracking-tight text-white">Services</h1><span className="z-10 rounded-full bg-white/14 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-white ring-1 ring-white/20">Menu</span></div>
-      <p className="mt-3 px-1 text-sm leading-6 text-white/85">Official Femina Plus base prices. “Onwards” prices can vary by hair length, product use and service complexity.</p>
+  return <main className="panache-page min-h-screen px-3 pb-10 pt-[max(0.75rem,env(safe-area-inset-top))]" style={{ background: '#F4F1EB' }}><div className="mx-auto w-full max-w-md">
+    <div className="sticky top-0 z-30 -mx-3 bg-[#F4F1EB] px-3 pt-2 pb-1"><header data-page-hero className="overflow-hidden rounded-[28px] border border-white/20 p-3.5 text-white shadow-[0_16px_34px_rgba(79,56,18,.24)]" style={{ backgroundImage: "linear-gradient(90deg,rgba(48,34,13,.98) 0%,rgba(103,77,28,.94) 54%,rgba(139,106,42,.68) 100%),url('/femina/panache-salon-interior.png')", backgroundSize: 'cover', backgroundPosition: 'center right' }}>
+      <div className="relative flex items-center justify-between"><Link href="/" onClick={() => prepareReturnToHeroCard()} className="z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20" aria-label="Back"><ArrowLeft className="h-5 w-5" /></Link><h1 className="absolute left-0 right-0 px-12 text-center text-[1.65rem] font-black leading-tight tracking-tight text-white">Services</h1><span className="z-10 rounded-full bg-white/14 px-2.5 py-1 text-[10px] font-black uppercase tracking-[.12em] ring-1 ring-white/20">Salon</span></div>
+      <p className="relative mt-3 px-1 text-sm leading-6 text-white/72">Explore Panaché hair, beauty, skin, nails, makeup and men’s grooming services, with prices shown wherever available.</p>
+      <nav className="mt-3 grid grid-cols-3 gap-1.5 rounded-2xl border border-white/55 bg-white/95 p-1.5 shadow-[0_10px_22px_rgba(0,0,0,.15)]"><Link data-active="true" href="/services" className="flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[linear-gradient(135deg,#665020,#9a7a35)] text-[11px] font-black text-white"><Scissors className="h-3.5 w-3.5"/>Services</Link><Link href="/packages" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><IndianRupee className="h-3.5 w-3.5"/>Prices</Link><Link href="/book-consultation" className="flex h-9 items-center justify-center gap-1.5 rounded-xl text-[11px] font-bold text-[#29231a]"><CalendarDays className="h-3.5 w-3.5"/>Book</Link></nav>
       <div className="mt-4"><div className="mb-2.5 flex items-center justify-between gap-2 px-0.5"><p className="text-[11px] font-black uppercase tracking-[0.14em] text-white/70">Categories</p><div className="flex items-center gap-1.5"><button type="button" onClick={goPrev} className="inline-flex items-center gap-0.5 rounded-full border border-white/20 bg-white/12 px-2.5 py-1.5 text-[12px] font-bold text-white shadow-sm" aria-label="Previous category"><ChevronLeft className="h-4 w-4" />Prev</button><button type="button" onClick={goNext} className="inline-flex items-center gap-0.5 rounded-full border border-white/20 bg-white/12 px-2.5 py-1.5 text-[12px] font-bold text-white shadow-sm" aria-label="Next category">Next<ChevronRight className="h-4 w-4" /></button></div></div><div ref={categoryScrollRef} className="-mx-0.5 flex gap-2 overflow-x-auto px-0.5 pb-1 pt-0.5 scrollbar-hide" style={{ scrollSnapType: 'x proximity' }}>{categoryKeys.map((key) => <CategoryPill key={key} label={categoryTabLabels[key]} category={key} isActive={activeCategory === key} onClick={() => selectCategory(key)} />)}</div></div>
-    </header>
-    <div className="mb-3 flex items-center justify-between px-1"><div><h2 className="text-lg font-black text-slate-950">{currentCategory.name}</h2><p className="mt-1 text-[13px] leading-snug text-slate-500">{currentCategory.shortDescription}</p></div><span className="shrink-0 rounded-full bg-[#FFF0F6] px-2.5 py-1 text-xs font-black text-[#B32A64]">{currentCategory.items.length}</span></div>
+    </header></div>
+    <div className="relative mb-4 min-h-[118px] overflow-hidden rounded-[24px] border border-[#E2D2B4] bg-white p-4 shadow-[0_12px_28px_rgba(79,56,18,.10)]"><Image src={currentCategory.image} alt="" fill className="object-cover opacity-[.32]" sizes="448px" /><div className="absolute inset-0 bg-[linear-gradient(95deg,#fff_0%,rgba(255,255,255,.94)_55%,rgba(255,255,255,.34)_100%)]" /><div className="relative flex min-h-[86px] items-center justify-between gap-3"><div className="max-w-[75%]"><p className="text-[10px] font-black uppercase tracking-[.14em] text-[#9B7A32]">Panaché salon services</p><h2 className="mt-1 text-lg font-black text-[#181818]">{currentCategory.name}</h2><p className="mt-1 text-[13px] leading-snug text-[#5F5A54]">{currentCategory.shortDescription}</p></div><span className="shrink-0 rounded-full border border-[#D8C58D] bg-[#FFF9EA] px-2.5 py-1 text-xs font-black text-[#604B22]">{currentCategory.items.length}</span></div></div>
     <AnimatePresence mode="wait"><motion.div key={activeCategory} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }} className="space-y-3">{currentCategory.items.map((service, index) => <ServiceCard key={service.id} item={service} category={activeCategory} index={index} />)}</motion.div></AnimatePresence>
   </div></main>
 }

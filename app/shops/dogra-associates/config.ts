@@ -1,8 +1,8 @@
-// Shop configuration for the Femina Plus Luxe demonstration OneLink.
+// Shop configuration for the Panaché Salon OneLink.
 
 import { PUBLIC_SITE_URL } from '../../lib/public-site-url'
 
-export type ContactPersonLabel = 'Salon' | 'Landline'
+export type ContactPersonLabel = 'Salon' | 'Booking'
 
 export interface ContactPerson {
   label: ContactPersonLabel
@@ -12,97 +12,93 @@ export interface ContactPerson {
 }
 
 export const shopConfig = {
-  name: 'Luméra Salon & Spa',
-  tagline: 'Hair • Beauty • Wellness',
-  taglineShort: 'Hair • Beauty • Makeup • Nails',
-  serviceTagline: 'Hair • Beauty • Makeup • Nails',
-  snapshotLocationLine: 'SCO 164–165, Sector 9-C, Chandigarh 160009',
-  snapshotServicesLine: 'Hair • Beauty • Makeup • Nails • Hair Systems',
-  snapshotHours: 'Mon-Sun 10:00 AM - 9:00 PM',
+  name: 'Panaché Salon',
+  tagline: 'Luxury Boutique Salon',
+  taglineShort: 'Hair • Beauty • Makeup • Chandigarh',
+  serviceTagline: 'Hair • Beauty • Makeup',
+  snapshotLocationLine: 'SCO 16–17, Ground Floor, Sector 9D, Chandigarh 160009',
+  snapshotServicesLine: 'Hair • Beauty • Makeup',
+  snapshotHours: 'Daily 10:00 AM - 8:00 PM',
   url: PUBLIC_SITE_URL,
   cardType: 'B2C' as const,
-  keywordBadges: ['Curated Beauty', 'Salon & Wellness'] as string[],
+  keywordBadges: ['Luxury Boutique Salon', 'Sector 9D • Chandigarh'] as string[],
 
   contact: {
-    phones: ['7973268966', '01724024040'],
-    email: 'hello@lumera.example',
-    address: 'Sector 17, Chandigarh',
-    locationLine: 'Luméra Studio, Sector 17, Chandigarh',
-    mapQuery: 'Sector 17, Chandigarh',
-    storeHours: 'Mon-Sun 10:00 AM - 9:00 PM',
+    phones: ['6239604348', '9560983067'],
+    email: '',
+    address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009',
+    locationLine: 'SCO 16–17, Ground Floor, Sector 9D, Chandigarh',
+    mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh',
+    storeHours: 'Daily 10:00 AM - 8:00 PM',
     storeHoursStatus: 'Open daily',
-    officePhone: '01724024040',
-    clientPhone: '7973268966',
-    clientPhoneE164: '917973268966',
-    officePhoneE164: '911724024040',
+    officePhone: '6239604348',
+    clientPhone: '9560983067',
+    clientPhoneE164: '919560983067',
+    officePhoneE164: '916239604348',
   },
 
   branches: [
-    { name: 'FP LUXE', address: 'SCO 164–165, Sector 9-C, Chandigarh 160009', phone: '+91 79732 68966', mapQuery: 'Femina Plus Luxe SCO 164 165 Sector 9 C Chandigarh' },
-    { name: 'FP44', address: 'SCO 268, Sector 44-C, Chandigarh', phone: '+91 87250 55006', mapQuery: 'Femina Plus FP44 SCO 268 Sector 44 Chandigarh' },
-    { name: 'FP Kharar', address: 'SCO 55, Sector 125, New Sunny Enclave, Kharar', phone: '+91 98159 31884', mapQuery: 'Femina Plus Kharar Sector 125 New Sunny Enclave' },
-    { name: 'FP Panchkula', address: 'SCO 386, Sector 8, Panchkula', phone: '+91 98159 62884', mapQuery: 'Femina Plus Panchkula SCO 386 Sector 8' },
-    { name: 'FP Zirakpur', address: 'Pooja Plazio, above Gopal Sweets, Zirakpur', phone: '+91 98722 34488', mapQuery: 'Femina Plus Zirakpur Pooja Plazio' },
+    { name: 'Panaché Salon', address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009', phone: '+91 62396 04348', mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh' },
   ],
 
   contactPersons: [
-    { label: 'Salon' as ContactPersonLabel, phoneE164: '917973268966', phoneDisplay: '+91 79732 68966', whatsappE164: '917973268966' },
-    { label: 'Landline' as ContactPersonLabel, phoneE164: '911724024040', phoneDisplay: '0172 4024040', whatsappE164: '917973268966' },
+    { label: 'Salon' as ContactPersonLabel, phoneE164: '916239604348', phoneDisplay: '+91 62396 04348', whatsappE164: '919560983067' },
+    { label: 'Booking' as ContactPersonLabel, phoneE164: '919560983067', phoneDisplay: '+91 95609 83067', whatsappE164: '919560983067' },
   ] as ContactPerson[],
 
   whatsapp: {
-    defaultPhone: '7973268966',
-    defaultMessage: 'Hi Luméra Salon & Spa, I would like to book an appointment.',
+    defaultPhone: '9560983067',
+    defaultMessage: 'Hi Panaché, I would like to book an appointment.',
     showSelector: false,
     selectorPersons: ['Salon'] as ContactPersonLabel[],
   },
 
   social: {
     facebook: 'https://www.facebook.com/',
-    instagram: 'https://www.instagram.com/',
+    instagram: 'https://www.instagram.com/panache_chd/',
     instagramJammu: '',
     twitter: '',
     linkedin: '',
     zomato: '',
   },
 
-  trustBadges: ['Curated Beauty', 'Salon & Wellness'] as string[],
+  trustBadges: ['Luxury Boutique Salon', 'Sector 9D • Chandigarh'] as string[],
   brands: [
     { name: 'Hair', tagline: '', logo: '' },
     { name: 'Beauty', tagline: '', logo: '' },
     { name: 'Makeup', tagline: '', logo: '' },
     { name: 'Nails', tagline: '', logo: '' },
-    { name: 'Hair Systems', tagline: '', logo: '' },
   ],
 
   about: {
-    title: 'Welcome to Luméra',
-    shortDescription: 'A warm, modern salon for expressive hair, luminous skin, beautiful makeup, nails and restorative self-care.',
+    title: 'Welcome to Panaché',
+    shortDescription: 'A luxury boutique salon in Chandigarh where considered hair, polished beauty, skin, nails and occasion makeup come together through personal consultation and careful craft.',
   },
   menuUrl: '/services',
 
   // Retained only for the existing OneLink card payment face. The homepage does not promote payment.
   payment: {
-    upiId: '', upiId2: '', upiName: 'Luméra Salon & Spa', upiQrImageUrl: '', scannerImage: '',
+    upiId: '', upiId2: '', upiName: 'Panaché Salon', upiQrImageUrl: '', scannerImage: '',
     bank: { bankName: '', accountNumberMasked: '', ifsc: '', accountHolder: '' },
     showScanner: false, showDownloadQR: false,
   },
 
   google: {
-    placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || '',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sector%2017%20Chandigarh',
-    reviewsUrl: '',
+    // Temporary shared listing while Panaché's verified Google Place ID is pending.
+    placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || 'ChIJq9jGBgGDHjkRqcEyeHk2xtA',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20SCO%2016%2017%20Sector%209D%20Madhya%20Marg%20Chandigarh',
+    reviewsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJq9jGBgGDHjkRqcEyeHk2xtA',
   },
 
   seo: {
-    title: 'Luméra Salon & Spa | Hair, Beauty and Wellness',
-    description: 'A calm, modern salon for expressive hair, luminous skin, makeup and restorative self-care.',
-    keywords: 'Lumera salon, salon and spa, hair beauty wellness Chandigarh',
+    title: 'Panaché Salon | Luxury Boutique Salon Chandigarh',
+    description: 'Panaché Salon is a luxury boutique salon for hair, beauty and makeup in Sector 9D, Chandigarh.',
+    keywords: 'Panache Salon Chandigarh, luxury boutique salon, hair beauty makeup Sector 9D',
   },
 
   credits: { designer: 'RepixelX Studio', designerUrl: 'https://repixelx.com' },
   sections: { showAbout: true, showMenu: false, showServices: true, showGallery: true, showReviews: true, showSocialConnect: true, showContactCard: true, showFooter: true },
-  assets: { logo: '/femina/lumera-logo.svg', cover: '/femina/bridal.JPG', gallery: '/femina/', qr: '' },
+  assets: { logo: '/femina/panache-official-logo.jpg', cover: '/femina/bridal.JPG', gallery: '/femina/', qr: '' },
   catalog: [] as Array<{ id: string; title: string; description: string; logo: string; details: string; images: string[] }>,
   brochures: [] as Array<{ href: string; title: string }>,
 }

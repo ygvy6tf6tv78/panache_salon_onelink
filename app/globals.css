@@ -121,37 +121,148 @@ body {
   background: linear-gradient(90deg, rgba(10, 102, 178, 0.85), rgba(7, 59, 115, 0.45), rgba(255, 255, 255, 0));
 }
 
-/* Fictional Luméra demo theme: warm ivory surfaces with restrained salon gold. */
-.lumera-demo .section-title-accent::after {
-  background: linear-gradient(90deg, rgba(184, 135, 44, 0.9), rgba(184, 135, 44, 0.12), transparent) !important;
+/* Panaché editorial system — stone, ivory, charcoal and muted taupe. */
+.lumera-demo,
+.panache-page {
+  --panache-bg: #F4F1EB;
+  --panache-card: #FCFBF8;
+  --panache-text: #1D1B19;
+  --panache-muted: #746F69;
+  --panache-border: #DED9D2;
+  --panache-accent: #9B8468;
+  --panache-soft: #E9E2D8;
+  color: var(--panache-text);
+}
+.lumera-demo {
+  background: #151515 !important;
+}
+.lumera-demo .lower-dark {
+  background: #151515 !important;
 }
 .lumera-demo .lower-dark .section-title-accent h2,
 .lumera-demo .lower-dark footer p,
-.lumera-demo .lower-dark footer a {
-  color: #FFFFFF !important;
+.lumera-demo .lower-dark footer a { color: #FCFBF8 !important; }
+.lumera-demo .lower-dark .section-title-accent + p,
+.lumera-demo .lower-dark section > div:first-child > p,
+.lumera-demo .lower-dark section > p { color: rgba(244,241,235,.72) !important; }
+.lumera-demo .section-title-accent::after,
+.lumera-demo .lower-dark .section-title-accent::after {
+  background: linear-gradient(90deg, #F3F0E9, rgba(243,240,233,.08)) !important;
+  opacity: .36;
 }
+.luxury-gold-border {
+  isolation: isolate;
+}
+.luxury-gold-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(110deg,#B79657,#E6D2A0,#B79657);
+  opacity: .38;
+  -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.lumera-demo [data-actions-row] { gap: .65rem !important; }
 .lumera-demo [data-actions-row] [data-call-button],
-.lumera-demo [data-actions-row] a[href="/book-consultation"],
-.lumera-demo [data-actions-row] a[href="/doctor-profile"] {
-  background: linear-gradient(135deg, #3B2A20 0%, #8B641E 100%) !important;
-  border-color: rgba(248,231,163,.46) !important;
+.lumera-demo [data-actions-row] a[href="/packages"] {
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg,#604B22,#8A733A) !important;
+  border: 1px solid rgba(242,228,175,.50) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.30) !important;
+}
+.lumera-demo [data-actions-row] button[title="Book appointment"] {
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg,#604B22,#8A733A) !important;
+  border: 1px solid rgba(242,228,175,.50) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.30) !important;
+}
+.lumera-demo [data-actions-row] button[title="Open payment"] {
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg,#0F766E,#115E59) !important;
+  border: 1px solid rgba(167,243,208,.42) !important;
+  box-shadow: 0 9px 20px rgba(15,118,110,.28), inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
 .lumera-demo [data-actions-row] a[href="/services"] {
-  background: linear-gradient(135deg, #241C18 0%, #6F5120 100%) !important;
-  border-color: rgba(248,231,163,.46) !important;
+  background: linear-gradient(135deg,#604B22,#8A733A) !important;
+  border: 1px solid rgba(242,228,175,.50) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.30) !important;
 }
-.lumera-demo [data-actions-row] a[href="/packages"],
+.lumera-demo [data-actions-row] a[href="/services"] > div:nth-of-type(2) {
+  background: linear-gradient(90deg,#4A3A1B 0%,rgba(96,75,34,.94) 48%,rgba(96,75,34,.18) 100%) !important;
+}
+.lumera-demo [data-actions-row] a[href="/doctor-profile"],
+.lumera-demo [data-actions-row] a[href="/offers"],
 .lumera-demo [data-actions-row] a[href="/gallery"],
-.lumera-demo [data-actions-row] button:not([data-whatsapp-button]) {
-  color: #4A371D !important;
-  background: linear-gradient(135deg, #FFFDF8 0%, #F8E7A3 100%) !important;
-  border-color: rgba(184,135,44,.35) !important;
+.lumera-demo [data-actions-row] button:not([data-call-button]):not([data-whatsapp-button]):not([title="Open payment"]):not([title="Find our office"]):not([title="Book appointment"]):not([title="Save contact to your phone"]) {
+  color: #1D1B19 !important;
+  background: #FCFBF8 !important;
+  border: 1px solid #DED9D2 !important;
+  box-shadow: 0 5px 14px rgba(29,27,25,.06) !important;
+}
+.lumera-demo [data-actions-row] a[href*="instagram"] {
+  border: 1px solid #E4E0D7 !important;
+  background: #FCFBF8 !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
 }
 .lumera-demo [data-actions-row] [data-whatsapp-button] {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F4F0E6 100%) !important;
-  color: #3B2A20 !important;
-  border-color: rgba(37,211,102,.35) !important;
+  color: #1D1B19 !important;
+  background: #FCFBF8 !important;
+  border: 1px solid #E4E0D7 !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
 }
+.lumera-demo [data-actions-row] button[title="Save contact to your phone"] {
+  color: #171717 !important;
+  background: #FCFBF8 !important;
+  border: 1.5px solid #C7B27E !important;
+  box-shadow: 0 7px 17px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+.lumera-demo section article,
+.lumera-demo section > div[class*="rounded"] {
+  border-color: #DED9D2 !important;
+  box-shadow: 0 8px 24px rgba(29,27,25,.05) !important;
+}
+.lumera-demo footer { border-color: #DED9D2 !important; }
+.panache-page header,
+.panache-page section,
+.panache-page article {
+  border-color: #DED9D2 !important;
+  box-shadow: 0 8px 24px rgba(29,27,25,.05) !important;
+}
+.panache-page header:not([data-page-hero]):not([data-marble-hero]) {
+  color: #1D1B19 !important;
+  background: #FCFBF8 !important;
+}
+.panache-page header:not([data-page-hero]):not([data-marble-hero]) h1,
+.panache-page header:not([data-page-hero]):not([data-marble-hero]) p,
+.panache-page header:not([data-page-hero]):not([data-marble-hero]) button,
+.panache-page header:not([data-page-hero]):not([data-marble-hero]) a { color: #1D1B19 !important; }
+.panache-page header[data-marble-hero] h1,
+.panache-page header[data-marble-hero] > p,
+.panache-page header[data-marble-hero] > div > span { color: #FFFFFF !important; }
+.panache-page header[data-page-hero] h1,
+.panache-page header[data-page-hero] p,
+.panache-page header[data-page-hero] button,
+.panache-page header[data-page-hero] a { color: #FFFFFF !important; }
+.panache-page article { background: #FCFBF8 !important; }
+.panache-page h1,.panache-page h2,.panache-page h3 { color: #1D1B19 !important; }
+.panache-page p { color: #746F69 !important; }
+.panache-page button,
+.panache-page a { border-color: #DED9D2 !important; }
+.panache-page header[data-page-hero] nav a,
+.panache-page header[data-marble-hero] nav a { color: #29231A !important; }
+.panache-page header[data-page-hero] nav a[data-active="true"],
+.panache-page header[data-marble-hero] nav a[data-active="true"] { color: #FFFFFF !important; border-color: rgba(216,197,141,.6) !important; }
+.panache-page header[data-page-hero] h1,
+.panache-page header[data-marble-hero] h1 { color: #FFFFFF !important; }
+.panache-page header[data-page-hero] > p,
+.panache-page header[data-marble-hero] > p { color: rgba(255,255,255,.82) !important; }
+.panache-page header[data-page-hero] > div:last-child button,
+.panache-page header[data-marble-hero] > div:last-child button { color: #FFFFFF !important; }
 
 .booking-form-blue label span {
   color: rgb(30, 41, 59) !important;

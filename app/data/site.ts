@@ -1,28 +1,28 @@
 import { PUBLIC_SITE_URL } from '../lib/public-site-url'
 
 export const siteConfig = {
-  name: 'Luméra Salon & Spa',
-  tagline: 'Hair • Beauty • Wellness',
+  name: 'Panaché Salon',
+  tagline: 'Luxury Boutique Salon',
   url: PUBLIC_SITE_URL,
-  contact: { phones: ['7973268966', '01724024040'], email: 'hello@lumera.example', address: 'Sector 17, Chandigarh', mapQuery: 'Sector 17, Chandigarh', storeHours: 'Mon-Sun 10:00 AM - 9:00 PM', officePhone: '01724024040' },
+  contact: { phones: ['6239604348', '9560983067'], email: '', address: 'SCO 16–17, Ground Floor, Madhya Marg, Sector 9D, Chandigarh – 160009', mapQuery: 'Panache Salon SCO 16 17 Sector 9D Madhya Marg Chandigarh', storeHours: 'Daily 10:00 AM - 8:00 PM', officePhone: '6239604348' },
   contactPersons: [
-    { label: 'Salon' as const, phoneE164: '917973268966', phoneDisplay: '+91 79732 68966', whatsappE164: '917973268966' },
-    { label: 'Landline' as const, phoneE164: '911724024040', phoneDisplay: '0172 4024040', whatsappE164: '917973268966' },
+    { label: 'Salon' as const, phoneE164: '916239604348', phoneDisplay: '+91 62396 04348', whatsappE164: '919560983067' },
+    { label: 'Booking' as const, phoneE164: '919560983067', phoneDisplay: '+91 95609 83067', whatsappE164: '919560983067' },
   ],
-  whatsapp: { defaultPhone: '7973268966', defaultMessage: 'Hi Luméra Salon & Spa, I would like to book an appointment.' },
-  trustBadges: ['Curated Beauty', 'Salon & Wellness'],
+  whatsapp: { defaultPhone: '9560983067', defaultMessage: 'Hi Panaché, I would like to book an appointment.' },
+  trustBadges: ['Luxury Boutique Salon', 'Sector 9D • Chandigarh'],
   brands: [{ name: 'Hair', tagline: '', logo: '' }, { name: 'Beauty', tagline: '', logo: '' }, { name: 'Makeup', tagline: '', logo: '' }, { name: 'Nails', tagline: '', logo: '' }],
   about: {
-    title: 'Welcome to Luméra',
-    shortDescription: 'A warm, modern salon for expressive hair, luminous skin, beautiful makeup, nails and restorative self-care.',
-    fullDescription: 'Luméra Salon & Spa brings hair, beauty, makeup, nails and restorative care together in a calm, considered studio. Speak to the team on WhatsApp to plan your appointment.',
+    title: 'Welcome to Panaché',
+    shortDescription: 'A luxury boutique salon for expressive hair, polished beauty and memorable makeup experiences in Chandigarh.',
+    fullDescription: 'Panaché brings hair, beauty and makeup together in a refined boutique setting. Discover the services, explore published prices and book directly with the salon on WhatsApp.',
   },
   catalog: [] as Array<{ id: string; title: string; description: string; logo: string; details: string; images: string[] }>,
   brochures: [] as Array<{ href: string; title: string }>,
-  social: { facebook: 'https://www.facebook.com/', instagram: 'https://www.instagram.com/', twitter: '', linkedin: '' },
-  seo: { title: 'Luméra Salon & Spa | Hair, Beauty and Wellness', description: 'A calm, modern salon for expressive hair, luminous skin, makeup and restorative self-care.', keywords: 'Lumera salon, salon and spa, hair beauty wellness Chandigarh' },
+  social: { facebook: 'https://www.facebook.com/', instagram: 'https://www.instagram.com/panache_chd/', twitter: '', linkedin: '' },
+  seo: { title: 'Panaché Salon | Luxury Boutique Salon Chandigarh', description: 'Hair, beauty and makeup at Panaché Salon, Sector 9D, Chandigarh.', keywords: 'Panache Salon Chandigarh, luxury boutique salon, hair beauty makeup' },
   credits: { designer: 'RepixelX Studio', designerUrl: 'https://repixelx.com' },
-  google: { placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || '', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sector%2017%20Chandigarh', reviewsUrl: '' },
+  google: { placeId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || '', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20Sector%209D%20Chandigarh', reviewsUrl: 'https://www.google.com/maps/search/?api=1&query=Panache%20Salon%20Sector%209D%20Chandigarh' },
 }
 
 export type SiteConfig = typeof siteConfig

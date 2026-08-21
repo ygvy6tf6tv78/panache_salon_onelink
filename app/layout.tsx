@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}${shopConfig.assets.cover}`,
         width: 1200,
         height: 630,
-        alt: 'Femina Plus Luxe | Luxury Salon in Chandigarh',
+        alt: 'Panaché Salon | Luxury Boutique Salon in Chandigarh',
         type: 'image/jpeg',
       },
     ],
@@ -65,7 +65,9 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  // The workspace currently resolves two compatible React type packages.
+  // Keep this boundary neutral until dependencies are consolidated.
+  children: any
 }) {
   // JSON-LD structured data for LocalBusiness
   const jsonLd = {

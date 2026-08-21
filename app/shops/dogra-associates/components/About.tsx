@@ -15,9 +15,9 @@ export default function About() {
       <div
         className="section-shell"
         style={{
-          background: '#B32A64',
-          border: '1px solid rgba(10,102,178,0.22)',
-          boxShadow: '0 20px 50px rgba(7, 59, 115, 0.22), 0 8px 22px rgba(10,102,178,0.12)',
+          background: 'linear-gradient(135deg,#4A3615 0%,#80652C 62%,#A1843F 100%)',
+          border: '1px solid rgba(216,190,136,.48)',
+          boxShadow: '0 16px 34px rgba(79,56,18,.28), inset 0 1px 0 rgba(255,255,255,.17)',
         }}
       >
         <div className="section-shell-inner p-6 sm:p-7">
@@ -25,14 +25,14 @@ export default function About() {
 
           <div className="relative">
             <div className="section-title-accent mb-4">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight text-left">
+              <h2 className="whitespace-nowrap text-[22px] font-extrabold leading-none tracking-[-0.035em] text-white sm:text-3xl text-left">
                 {shopConfig.about.title}
               </h2>
             </div>
-            <p className="text-white/90 leading-[1.7] text-[15px]">
+            <p className="text-white/95 leading-[1.7] text-[17px] font-medium sm:text-[18px]">
               {shopConfig.about.shortDescription}
             </p>
-            <div className="mt-5 h-px w-full bg-gradient-to-r from-white/40 via-[#60A5FA]/65 to-transparent" />
+            <div className="mt-5 h-px w-full bg-white/25" />
           </div>
         </div>
       </div>

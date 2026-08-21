@@ -101,7 +101,19 @@ export default function GoogleReviews() {
   }, [])
 
   if (!shopConfig.google?.placeId) {
-    return null
+    return (
+      <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
+        <div className="section-title-accent mb-5">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.03em] text-[#1D1B19] text-left">Google Reviews</h2>
+          <p className="mt-2 text-sm text-[#746F69]">Read customer experiences and view Panaché on Google.</p>
+        </div>
+        <div className="rounded-[24px] border border-[#DED9D2] bg-[#FCFBF8] p-5 shadow-[0_8px_24px_rgba(29,27,25,.05)]">
+          <div className="flex items-center gap-1 text-[#9B8468]" aria-hidden>{[1,2,3,4,5].map((star) => <Star key={star} className="h-5 w-5" />)}</div>
+          <p className="mt-3 text-sm leading-6 text-[#746F69]">Google rating details will appear here when the Place ID is configured.</p>
+          <Link href={shopConfig.google.reviewsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 flex h-11 items-center justify-center rounded-2xl border border-[#DED9D2] bg-[#E9E2D8] text-sm font-semibold text-[#1D1B19]">View on Google</Link>
+        </div>
+      </section>
+    )
   }
 
   // Show skeleton loader
@@ -110,7 +122,7 @@ export default function GoogleReviews() {
       <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
         <div className="mb-5">
           <div className="section-title-accent">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#181818] text-left">
               Google Reviews
             </h2>
           </div>
@@ -140,7 +152,7 @@ export default function GoogleReviews() {
           </div>
           <Link
             href="/reviews"
-            className="text-sm font-semibold text-white/90 hover:text-white transition-colors flex items-center gap-1"
+            className="text-sm font-semibold text-[#d8b968] hover:text-[#f0d494] transition-colors flex items-center gap-1"
           >
             View All
             <ChevronRight className="w-4 h-4" />
@@ -155,7 +167,7 @@ export default function GoogleReviews() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block font-semibold py-2 px-4 rounded-xl transition-all text-white"
-            style={{ background: '#B8872C' }}
+            style={{ background: 'linear-gradient(135deg,#604B22,#9A7A35)' }}
           >
             Open Google Reviews
           </Link>
@@ -174,13 +186,13 @@ export default function GoogleReviews() {
     <section id="reviews" className="w-full max-w-md mx-auto pt-8 pb-6">
       <div className="flex items-center justify-between mb-5">
         <div className="section-title-accent">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white text-left">
             Google Reviews
           </h2>
         </div>
         <Link
           href="/reviews"
-          className="text-sm font-semibold text-white/90 hover:text-white transition-colors flex items-center gap-1"
+          className="text-sm font-semibold text-[#d8b968] hover:text-[#f0d494] transition-colors flex items-center gap-1"
         >
           View All
           <ChevronRight className="w-4 h-4" />
@@ -303,21 +315,21 @@ export default function GoogleReviews() {
           href="/reviews"
           className="block w-full font-semibold py-3 px-4 rounded-2xl transition-all flex items-center justify-center gap-2"
           style={{
-            background: '#FFFFFF',
-            color: '#0F2A44',
-            border: '1px solid #E5ECF6',
-            boxShadow: '0 8px 20px rgba(15,42,68,0.06)',
+            background: 'linear-gradient(135deg,#FCFBF8,#F2E6CC)',
+            color: '#3E3018',
+            border: '1px solid rgba(216,197,141,.58)',
+            boxShadow: '0 8px 20px rgba(96,75,34,.13)',
           }}
         >
           View All Reviews
-          <ArrowRight className="w-4 h-4" style={{ color: '#B8872C' }} />
+          <ArrowRight className="w-4 h-4" style={{ color: '#80652C' }} />
         </Link>
         <Link
           href={writeReviewUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full font-semibold py-3 px-4 rounded-2xl transition-all flex items-center justify-center gap-2 text-white"
-          style={{ background: '#B8872C', boxShadow: '0 8px 20px rgba(184,135,44,0.24)' }}
+          style={{ background: 'linear-gradient(135deg,#604B22,#9A7A35)', boxShadow: '0 8px 20px rgba(96,75,34,.28)' }}
         >
           Write on Google
           <Star className="w-4 h-4 fill-white text-white" />

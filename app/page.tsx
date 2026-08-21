@@ -7,11 +7,13 @@ import Hero from './shops/dogra-associates/components/Hero'
 import About from './shops/dogra-associates/components/About'
 import MenuPreview from './shops/dogra-associates/components/MenuPreview'
 import Services from './shops/dogra-associates/components/Services'
+import UrgencyCTA from './shops/dogra-associates/components/UrgencyCTA'
 import ContactCard from './shops/dogra-associates/components/ContactCard'
 // Shop-specific components (Gallery and Reviews)
 import Gallery from './shops/dogra-associates/components/Gallery'
 import GoogleReviews from './shops/dogra-associates/components/GoogleReviews'
-import UrgencyCTA from './shops/dogra-associates/components/UrgencyCTA'
+import InstagramCTA from './shops/dogra-associates/components/InstagramCTA'
+import SalonUpdate from './shops/dogra-associates/components/SalonUpdate'
 // Shared components
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
@@ -89,24 +91,25 @@ export default function Home() {
         <main 
           className="lumera-demo min-h-screen relative z-10 overflow-x-hidden pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]"
           style={{
-            background: '#191A19',
+            background: '#151515',
           }}
         >
           <div className="relative z-10">
             <Hero />
+            <SalonUpdate />
             <About />
             <div
-              className="lower-dark -mx-4 mt-0 px-4 pt-4 pb-[max(2rem,env(safe-area-inset-bottom))]"
+              className="lower-dark -mx-4 mt-0 px-4 pt-6 pb-[max(2rem,env(safe-area-inset-bottom))]"
               style={{
-                background:
-                  'linear-gradient(180deg, #191A19 0%, #151615 54%, #191A19 100%)',
+                background: '#151515',
               }}
             >
               <MenuPreview />
-              <UrgencyCTA />
               <Services />
-              <GoogleReviews />
+              <UrgencyCTA />
               <Gallery />
+              <GoogleReviews />
+              <InstagramCTA />
               <ContactCard />
               <div className="mt-8">
                 <Footer />

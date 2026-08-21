@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   ArrowRight,
-  Receipt,
-  Building2,
-  ClipboardCheck,
-  TrendingUp,
+  Brush,
+  Crown,
+  Scissors,
+  Sparkles,
   type LucideIcon,
 } from 'lucide-react'
 import Image from 'next/image'
@@ -17,10 +17,10 @@ import { setReturnSection } from '../../../lib/homeNavigation'
 // Map preview-card key → Lucide icon. Keeps services.ts free of React imports
 // while letting us swap emojis for crisp, consistent line icons.
 const previewIconMap: Record<string, LucideIcon> = {
-  taxGst: Receipt,
-  compliance: Building2,
-  audit: ClipboardCheck,
-  planning: TrendingUp,
+  hairWomen: Scissors,
+  beauty: Sparkles,
+  nails: Brush,
+  makeup: Crown,
 }
 
 export default function MenuPreview() {
@@ -35,11 +35,11 @@ export default function MenuPreview() {
         className="mb-5"
       >
         <div className="section-title-accent mb-3">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 tracking-tight text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight text-left">
             Services
           </h2>
         </div>
-        <p className="text-sm sm:text-base text-slate-600 font-medium text-left tracking-wide">
+        <p className="text-sm sm:text-base text-[#c9c3ba] font-medium text-left tracking-wide">
           Hair • Beauty • Makeup • Nails
         </p>
       </motion.div>
@@ -47,7 +47,7 @@ export default function MenuPreview() {
       {/* 4-card square grid — Mango "Our Menu" geometry */}
       <div className="grid grid-cols-2 gap-3.5 mb-5">
         {servicesPreviewCards.map((card, index) => {
-          const Icon = previewIconMap[card.key] ?? Receipt
+          const Icon = previewIconMap[card.key] ?? Sparkles
           return (
           <Link key={card.key} href={card.href} className="block">
             <motion.div
@@ -55,7 +55,7 @@ export default function MenuPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: index * 0.05, duration: 0.35, ease: 'easeOut' }}
-              className="relative aspect-square rounded-[24px] overflow-hidden cursor-pointer group border border-white/10 shadow-[0_16px_32px_rgba(15,23,42,0.32)] transition-all duration-300"
+              className="relative aspect-square rounded-[24px] overflow-hidden cursor-pointer group border border-white/20 shadow-[0_16px_32px_rgba(15,15,15,0.32)] transition-all duration-300"
             >
               <Image
                 src={card.image}
@@ -71,12 +71,12 @@ export default function MenuPreview() {
               {/* Subtle top sheen */}
               <div className="absolute inset-x-5 top-4 h-12 rounded-full bg-white/10 blur-2xl z-[1]" />
 
-              {/* Clean black gradient — matches Mango "Our Menu" exactly */}
+              {/* Black granite overlay keeps the editorial imagery readable. */}
               <div
                 className="absolute inset-0 z-[1]"
                 style={{
                   background:
-                    'linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.9) 36%, rgba(0,0,0,0.56) 66%, rgba(0,0,0,0.22) 100%)',
+                    'linear-gradient(to top, rgba(15,13,12,0.98) 0%, rgba(20,17,15,0.88) 38%, rgba(29,25,22,0.52) 68%, rgba(29,25,22,0.12) 100%)',
                 }}
               />
 
@@ -84,14 +84,14 @@ export default function MenuPreview() {
               <div
                 className="absolute top-3 right-3 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center z-10 backdrop-blur-md"
                 style={{
-                  background: 'rgba(255,255,255,0.16)',
-                  border: '1px solid rgba(255,255,255,0.30)',
+                  background: 'rgba(26,22,18,0.58)',
+                  border: '1px solid rgba(220,190,126,0.55)',
                   boxShadow:
                     '0 8px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.30)',
                 }}
               >
                 <Icon
-                  className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-white"
+                  className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#f0d494]"
                   strokeWidth={2.2}
                 />
               </div>
@@ -110,7 +110,7 @@ export default function MenuPreview() {
                 >
                   {card.shortDescription}
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-slate-100 font-semibold text-xs sm:text-sm bg-white/14 hover:bg-white/22 px-3 py-1.5 rounded-full transition-colors border border-white/20 backdrop-blur-md">
+                <span className="inline-flex items-center gap-1.5 text-white font-bold text-xs sm:text-sm bg-[linear-gradient(135deg,#765820,#a27d31)] px-3 py-1.5 rounded-full transition-colors border border-[#efd58e]/65 shadow-[0_6px_14px_rgba(0,0,0,.24)]">
                   Explore Service
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </span>
@@ -132,14 +132,17 @@ export default function MenuPreview() {
         <Link
           href="/services"
           onClick={() => setReturnSection('services')}
-          className="block w-full text-white font-bold py-4 px-6 rounded-2xl transition-all flex items-center justify-center gap-2"
+          className="group relative flex min-h-[78px] w-full items-center justify-between overflow-hidden rounded-[22px] border border-white/25 px-5 text-white transition-transform active:scale-[0.99]"
           style={{
-            background: 'linear-gradient(135deg, #7A2148 0%, #B32A64 100%)',
-            boxShadow: '0 18px 34px rgba(7, 59, 115, 0.34)',
+            backgroundImage: "linear-gradient(90deg,#604B22 0%,rgba(128,101,44,.96) 43%,rgba(128,101,44,.45) 68%,rgba(20,17,15,.18) 100%),url('/femina/panache-salon-interior.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            boxShadow: '0 15px 30px rgba(15,13,12,.30), inset 0 1px 0 rgba(255,255,255,.22)',
           }}
         >
-          View Full Service Menu
-          <ArrowRight className="w-5 h-5" />
+          <span className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,.13),transparent_38%,rgba(198,155,102,.12))] backdrop-blur-[1px]" />
+          <span className="relative z-10 text-left"><span className="block text-[16px] font-extrabold">View Full Service Menu</span><span className="mt-0.5 block text-xs font-semibold text-white/70">Browse every service by category</span></span>
+          <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-white/14 backdrop-blur-md"><ArrowRight className="h-5 w-5" /></span>
         </Link>
       </motion.div>
     </section>
