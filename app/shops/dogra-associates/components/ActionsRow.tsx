@@ -122,7 +122,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
 
   return (
     <>
-      <div className="flex w-full min-w-0 max-w-full flex-col gap-3">
+      <div className="flex w-full min-w-0 max-w-full flex-col gap-2.5">
         {/* Row 1: Call Now | Book Visit */}
         <div className="order-1 grid grid-cols-2 gap-2 w-full min-w-0">
           <Button
@@ -130,8 +130,8 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
             title="Call our office"
             onClick={(e) => {
               playClickSound()
-              setCallSelectorOpen(!callSelectorOpen)
-              setWhatsappSelectorOpen(false)
+              e.stopPropagation()
+              window.location.href = getTelLink(shopConfig.contactPersons[0].phoneE164)
             }}
             className="luxury-gold-border w-full min-w-0 h-11 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation relative overflow-hidden group"
             style={{
@@ -250,7 +250,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
           </Link>
           <Button
             title="Find our office"
-            onClick={() => { playClickSound(); window.location.href = '/nearest-branch' }}
+            onClick={() => { playClickSound(); handleDirections() }}
             className="relative h-11 min-w-0 overflow-hidden rounded-2xl border border-white/80 transition-all flex items-center justify-center gap-2 active:scale-[0.97] touch-manipulation"
             style={{
               background: 'linear-gradient(115deg,#CFEBD7 0%,#DFF1E2 48%,#C7E7D2 100%)',

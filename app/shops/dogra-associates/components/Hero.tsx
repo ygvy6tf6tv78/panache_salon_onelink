@@ -26,6 +26,7 @@ export default function Hero() {
   /** Flip duration in ms – set per transition so 180°/360°/540° all feel same speed */
   const [flipDurationMs, setFlipDurationMs] = useState(650)
   const actionsRowRef = useRef<ActionsRowRef>(null)
+  const heroSectionRef = useRef<HTMLElement>(null)
 
   const headerImages = ['/femina/bridal.JPG', '/femina/hair-color.webp', '/femina/makeup.webp']
   const [headerImageIndex, setHeaderImageIndex] = useState(0)
@@ -35,11 +36,9 @@ export default function Hero() {
   useEffect(() => setHoursPortalMounted(true), [])
   useEffect(() => {
     if (!hoursPopoverOpen) return
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
     const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') setHoursPopoverOpen(false) }
     window.addEventListener('keydown', closeOnEscape)
-    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', closeOnEscape) }
+    return () => window.removeEventListener('keydown', closeOnEscape)
   }, [hoursPopoverOpen])
 
   // 180° = 0.65s, 360° = 1.3s, 540° = 2s (same angular speed)
@@ -173,6 +172,7 @@ export default function Hero() {
       return
     }
     setFlipDurationMs(DURATION_180_MS)
+    heroSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     setIsFlipping(true)
     if (currentFace === 'front') {
       setCurrentFace('info')
@@ -185,18 +185,20 @@ export default function Hero() {
   }
 
   const handleOpenPayments = useCallback(() => {
-    setFlipDurationMs(DURATION_360_MS)
+    heroSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setFlipDurationMs(DURATION_180_MS)
     setIsFlipping(true)
     setCurrentFace('payment')
-    setTimeout(() => setIsFlipping(false), DURATION_360_MS)
+    setTimeout(() => setIsFlipping(false), DURATION_180_MS)
   }, [])
 
   const handleBackFromPayment = () => {
     if (isFlipping) return
-    setFlipDurationMs(DURATION_360_MS)
+    heroSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setFlipDurationMs(DURATION_180_MS)
     setIsFlipping(true)
     setCurrentFace('front')
-    setTimeout(() => setIsFlipping(false), DURATION_360_MS)
+    setTimeout(() => setIsFlipping(false), DURATION_180_MS)
   }
 
   const handleOpenAppointment = useCallback(() => {
@@ -283,6 +285,7 @@ export default function Hero() {
 
   return (
     <motion.section
+      ref={heroSectionRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
@@ -517,7 +520,7 @@ export default function Hero() {
 
               {/* Brand info - title + subtitle + tagline + badges */}
               <motion.div 
-                className="pt-20 mb-4"
+                className="pt-14 mb-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -534,7 +537,7 @@ export default function Hero() {
                   </p>
                 )}
                 {'keywordBadges' in shopConfig && Array.isArray(shopConfig.keywordBadges) && (
-                  <div className="flex flex-col gap-2 mb-4 w-full">
+                  <div className="flex flex-col gap-2 mb-3 w-full">
                     {/* Business highlights with a dedicated timings control. */}
                     <div className="flex flex-nowrap items-center gap-2 w-full overflow-hidden">
                       {shopConfig.keywordBadges.map((badge: string) => {
@@ -556,23 +559,28 @@ export default function Hero() {
                         )
                       })}
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center pt-0.5">
                       <button
                         type="button"
-                        onClick={(event) => { event.stopPropagation(); window.setTimeout(() => setHoursPopoverOpen(true), 0) }}
-                        className="group inline-flex h-8 w-fit shrink-0 items-center gap-1.5 rounded-full border px-2.5 text-left transition active:scale-95"
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          heroSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                          window.setTimeout(() => setHoursPopoverOpen(true), 280)
+                        }}
+                        className="group relative inline-flex h-7 w-fit shrink-0 items-center gap-1.5 overflow-hidden rounded-full border px-2.5 text-left transition active:scale-95"
                         style={{ background: openStatus.isOpen ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.12)', color: openStatus.isOpen ? '#16A34A' : '#E5484D', borderColor: openStatus.isOpen ? 'rgba(34,197,94,.45)' : 'rgba(239,68,68,.40)', boxShadow: openStatus.isOpen ? '0 6px 14px rgba(34,197,94,.16)' : '0 6px 14px rgba(239,68,68,.12)' }}
                         aria-expanded={hoursPopoverOpen}
                       >
-                        <Clock3 className="h-4 w-4" strokeWidth={2.3} />
-                        <span className="text-[11px] font-black">{openStatus.isOpen ? 'Open now' : 'Closed now'}</span>
-                        <span className="text-[9.5px] font-extrabold opacity-90">{openStatus.isOpen ? `· Closes ${openStatus.closeTimeLabel}` : `· Opens ${openStatus.openTimeLabel}`}</span>
-                        <ChevronRight className="h-3 w-3 opacity-75 transition-transform group-hover:translate-x-0.5" />
+                        <span className="pointer-events-none absolute -left-1/3 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/80 to-transparent animate-[shine_3s_ease-in-out_infinite]" />
+                        <Clock3 className="relative z-10 h-3.5 w-3.5" strokeWidth={2.3} />
+                        <span className="relative z-10 text-[10.5px] font-black">{openStatus.isOpen ? 'Open now' : 'Closed now'}</span>
+                        <span className="relative z-10 text-[9px] font-extrabold opacity-90">{openStatus.isOpen ? `· Closes ${openStatus.closeTimeLabel}` : `· Opens ${openStatus.openTimeLabel}`}</span>
+                        <ChevronRight className="relative z-10 h-3 w-3 opacity-75 transition-transform group-hover:translate-x-0.5" />
                       </button>
                     </div>
                     {hoursPortalMounted && createPortal(<AnimatePresence>
                       {hoursPopoverOpen && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed left-1/2 top-3 z-[99999] flex h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-md -translate-x-1/2 items-start justify-center overflow-y-auto rounded-[26px] border border-[#d8be80]/65 bg-[#18120d]/48 p-4 pt-6 shadow-[0_28px_80px_rgba(0,0,0,.42)] backdrop-blur-md" onClick={() => setHoursPopoverOpen(false)}>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[99999] flex items-start justify-center overflow-y-auto bg-[#18120d]/48 p-4 pt-5 shadow-[0_28px_80px_rgba(0,0,0,.42)] backdrop-blur-md" onClick={() => setHoursPopoverOpen(false)}>
                           <motion.div initial={{ y: 45, opacity: 0, scale: .96 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 35, opacity: 0, scale: .97 }} transition={{ type: 'spring', stiffness: 310, damping: 27 }} className="relative w-full max-w-[360px] overflow-hidden rounded-[28px] border border-[#e2d2b4] bg-white p-5 shadow-[0_24px_64px_rgba(0,0,0,.32)]" onClick={(event) => event.stopPropagation()}>
                             <div className="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#ead28f]/25 blur-3xl" />
                             <div className="relative flex items-center justify-between"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-2xl border border-white bg-white/75 text-[#80652c] shadow-lg"><Clock3 className="h-5 w-5" /></span><div><p className="text-[10px] font-black uppercase tracking-[.18em] text-[#9B7A32]">Salon hours</p><h3 className="mt-0.5 text-xl font-black text-[#181818]">Plan your visit</h3></div></div><button type="button" onClick={() => setHoursPopoverOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-white bg-white/75 text-[#80652c]" aria-label="Close timings"><X className="h-4 w-4" /></button></div>

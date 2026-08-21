@@ -447,8 +447,8 @@ export default function PaymentFace({
                 e.stopPropagation()
                 onBack()
               }}
-              className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-2.5 px-4 rounded-xl border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer relative z-30 touch-manipulation"
-              style={{ WebkitTapHighlightColor: 'transparent' }}
+              className="pointer-events-auto w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-3 px-4 rounded-xl border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer relative z-[60] touch-manipulation"
+              style={{ WebkitTapHighlightColor: 'transparent', minHeight: '48px' }}
               aria-label={t('backToDetails')}
             >
               <ArrowLeft className="w-4 h-4" />
