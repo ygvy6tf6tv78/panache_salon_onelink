@@ -110,9 +110,10 @@ export default function MenuPreview() {
                 >
                   {card.shortDescription}
                 </p>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/14 px-3 py-1.5 text-xs font-semibold text-slate-100 backdrop-blur-md transition-colors sm:text-sm">
-                  Explore
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-[#e4c66e]/75 bg-black/25 px-3 py-1.5 text-xs font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_4px_12px_rgba(117,89,35,0.18)] backdrop-blur-md transition-colors sm:text-sm">
+                  <span aria-hidden className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-[#fff2bd]/70 to-transparent animate-[shine_3s_ease-in-out_infinite]" />
+                  <span className="relative z-10">Explore</span>
+                  <ArrowRight className="relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </span>
               </div>
             </motion.div>

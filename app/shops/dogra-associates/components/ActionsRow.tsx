@@ -285,7 +285,7 @@ const ActionsRow = forwardRef<ActionsRowRef, ActionsRowProps>(({ onOpenPayments,
           <Button title="Save contact to your phone" onClick={handleSaveContact} className="order-1 w-full min-w-0 h-11 bg-[#FCFBF8] backdrop-blur-md text-[#1D1B19] rounded-2xl border border-[#C7B27E] relative overflow-hidden transition-all touch-manipulation flex items-center justify-center gap-2" style={{ boxShadow: '0 8px 18px rgba(117,89,35,.14), inset 0 1px 0 rgba(255,255,255,.95)', WebkitTapHighlightColor: 'transparent', transform: 'translateY(-1px)' }}>
             <span className="pointer-events-none absolute -left-1/3 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/90 to-transparent animate-[shine_3s_ease-in-out_infinite]" />
             <Download className="relative z-10 h-4 w-4 text-[#1D1B19]" />
-            <span className="relative z-10 text-sm font-bold truncate">Save Panaché</span>
+            <span className="relative z-10 text-sm font-bold truncate">Save Contact</span>
           </Button>
         </div>
 
